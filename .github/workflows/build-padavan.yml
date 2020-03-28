@@ -52,19 +52,28 @@ jobs:
         #因不同型号配置功能不一样，所以先把配置项删除，如果你自己要添加其他的，也要写上删除这一条，切记！！！
         #以下的命令是：删除配置项。
         ################################################################################################
+        #常用的
         sed -i '/CONFIG_FIRMWARE_INCLUDE_ADBYBY/d' .config ### 广告过滤，adbyby plus+
         sed -i '/CONFIG_FIRMWARE_INCLUDE_KOOLPROXY/d' .config ### 广告过滤，koolproxy
         sed -i '/CONFIG_FIRMWARE_INCLUDE_ADGUARDHOME/d' .config ### 广告过滤，adguardhome
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_ALIDDNS/d' .config ### 阿里DDNS
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_SHADOWSOCKS/d' .config ### SS plus+，客户端
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_V2RAY/d' .config ### v2ray
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_TROJAN/d' .config ### trojan
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_CADDY/d' .config ### 在线文件管理服务
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_CADDYBIN/d' .config ### 集成caddy执行文件
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_HTTPS/d' .config ### https
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_VLMCSD/d' .config ### VLMCSD（KMS激活服务器）
+        #不常用
         sed -i '/CONFIG_FIRMWARE_INCLUDE_NJIT_CLIENT/d' .config ### 校园网相关 NJIT_CLIENT
         sed -i '/CONFIG_FIRMWARE_INCLUDE_SCUTCLIENT/d' .config ### 校园网相关 SCUTCLIENT
         sed -i '/CONFIG_FIRMWARE_INCLUDE_GDUT_DRCOM/d' .config ### 校园网相关 GDUT_DRCOM
-        sed -i '/CONFIG_FIRMWARE_INCLUDE_DOGCOM/d' .config ### 校园网相关 DOGCOM        
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_DOGCOM/d' .config ### 校园网相关 DOGCOM    
         sed -i '/CONFIG_FIRMWARE_INCLUDE_MINIEAP/d' .config ### 校园网相关 MINIEAP
         sed -i '/CONFIG_FIRMWARE_INCLUDE_MENTOHUST/d' .config ### MENTOHUST
         sed -i '/CONFIG_FIRMWARE_INCLUDE_SOFTETHERVPN_SERVER/d' .config ### SOFTETHERVPN_SERVER
         sed -i '/CONFIG_FIRMWARE_INCLUDE_SOFTETHERVPN_CLIENT/d' .config ### SOFTETHERVPN_CLIENT
         sed -i '/CONFIG_FIRMWARE_INCLUDE_SOFTETHERVPN_CMD/d' .config ### SOFTETHERVPN_CMD
-        sed -i '/CONFIG_FIRMWARE_INCLUDE_SHADOWSOCKS/d' .config ### SS plus+，客户端
         sed -i '/CONFIG_FIRMWARE_INCLUDE_SSSERVER/d' .config ### SS server，服务端
         sed -i '/CONFIG_FIRMWARE_INCLUDE_DNSFORWARDER/d' .config ### DNSFORWARDER，解析加速
         sed -i '/CONFIG_FIRMWARE_INCLUDE_SMARTDNS/d' .config ### smartdns，解析加速
@@ -75,30 +84,41 @@ jobs:
         sed -i '/CONFIG_FIRMWARE_INCLUDE_FRPC/d' .config ### 内网穿透FRPC
         sed -i '/CONFIG_FIRMWARE_INCLUDE_FRPS/d' .config ### 内网穿透FRPS
         sed -i '/CONFIG_FIRMWARE_INCLUDE_TUNSAFE/d' .config ### TUNSAFE
-        sed -i '/CONFIG_FIRMWARE_INCLUDE_ALIDDNS/d' .config ### 阿里DDNS
-        sed -i '/CONFIG_FIRMWARE_INCLUDE_V2RAY/d' .config ### v2ray
-        sed -i '/CONFIG_FIRMWARE_INCLUDE_TROJAN/d' .config ### trojan
-        sed -i '/CONFIG_FIRMWARE_INCLUDE_CADDY/d' .config ### 在线文件管理服务
-        sed -i '/CONFIG_FIRMWARE_INCLUDE_CADDYBIN/d' .config ### 集成caddy执行文件
-        sed -i '/CONFIG_FIRMWARE_INCLUDE_HTTPS/d' .config ### https
-        sed -i '/CONFIG_FIRMWARE_INCLUDE_VLMCSD/d' .config ### VLMCSD（KMS激活服务器）
-        
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_SOCAT/d' .config ### socat
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_MTR/d' .config ### MTR
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_RTL_SDR/d' .config ### RTL_SDR
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_DUMP1090/d' .config ### DUMP1090
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_IPERF3/d' .config ### IPERF3
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_NANO/d' .config ### NANO
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_HTOP/d' .config ### HTOP
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_LRZSZ/d' .config ### LRZSZ
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_TTYD/d' .config ### TTYD
+
         ######################################################################
         #以下选项是定义你需要的功能（y=集成,n=忽略），重新写入到.config文件
         ######################################################################
+        #常用的
         echo "CONFIG_FIRMWARE_INCLUDE_ADBYBY=y" >> .config #广告过滤，adbyby plus+
         echo "CONFIG_FIRMWARE_INCLUDE_KOOLPROXY=y" >> .config #广告过滤，koolproxy
         echo "CONFIG_FIRMWARE_INCLUDE_ADGUARDHOME=n" >> .config #广告过滤，adguardhome
+        echo "CONFIG_FIRMWARE_INCLUDE_ALIDDNS=y" >> .config #阿里DDNS
+        echo "CONFIG_FIRMWARE_INCLUDE_SHADOWSOCKS=y" >> .config #SS plus+，客户端
+        echo "CONFIG_FIRMWARE_INCLUDE_V2RAY=n" >> .config #集成v2ray执行文件（3.8M左右)，如果不集成，会从网上下载下来执行，不影响正常使用
+        echo "CONFIG_FIRMWARE_INCLUDE_TROJAN=n" >> .config #集成trojan执行文件(1.1M左右)，如果不集成，会从网上下载下来执行，不影响正常使用
+        echo "CONFIG_FIRMWARE_INCLUDE_CADDY=y" >> .config #caddy，在线文件管理服务
+        echo "CONFIG_FIRMWARE_INCLUDE_CADDYBIN=n" >> .config #集成caddy执行文件，此文件有13M,请注意固件大小。如果不集成，会从网上下载下来执行，不影响正常使用
+        echo "CONFIG_FIRMWARE_INCLUDE_HTTPS=y" >> .config #https
+        echo "CONFIG_FIRMWARE_INCLUDE_VLMCSD=n" >> .config #VLMCSD（KMS激活服务器）
+        #不常用
         echo "CONFIG_FIRMWARE_INCLUDE_NJIT_CLIENT=n" >> .config #校园网相关 NJIT_CLIENT
         echo "CONFIG_FIRMWARE_INCLUDE_SCUTCLIENT=n" >> .config #校园网相关 SCUTCLIENT
         echo "CONFIG_FIRMWARE_INCLUDE_GDUT_DRCOM=n" >> .config #校园网相关 GDUT_DRCOM
         echo "CONFIG_FIRMWARE_INCLUDE_DOGCOM=n" >> .config #校园网相关 DOGCOM
-        echo "CONFIG_FIRMWARE_INCLUDE_MINIEAP=n" >> .config #校园网相关 MINIEAP	
+        echo "CONFIG_FIRMWARE_INCLUDE_MINIEAP=n" >> .config #校园网相关 MINIEAP
         echo "CONFIG_FIRMWARE_INCLUDE_MENTOHUST=n" >> .config #MENTOHUST
         echo "CONFIG_FIRMWARE_INCLUDE_SOFTETHERVPN_SERVER=n" >> .config #SOFTETHERVPN_SERVER
-        echo "CONFIG_FIRMWARE_INCLUDE_SOFTETHERVPN_CLIENT=n" >> .config #SOFTETHERVPN_CLIENT	
+        echo "CONFIG_FIRMWARE_INCLUDE_SOFTETHERVPN_CLIENT=n" >> .config #SOFTETHERVPN_CLIENT
         echo "CONFIG_FIRMWARE_INCLUDE_SOFTETHERVPN_CMD=n" >> .config #SOFTETHERVPN_CMD
-        echo "CONFIG_FIRMWARE_INCLUDE_SHADOWSOCKS=y" >> .config #SS plus+，客户端
         echo "CONFIG_FIRMWARE_INCLUDE_SSSERVER=n" >> .config #SS server，服务端
         echo "CONFIG_FIRMWARE_INCLUDE_DNSFORWARDER=n" >> .config #DNSFORWARDER
         echo "CONFIG_FIRMWARE_INCLUDE_SMARTDNS=n" >> .config #smartdns
@@ -109,14 +129,16 @@ jobs:
         echo "CONFIG_FIRMWARE_INCLUDE_FRPC=n" >> .config #内网穿透FRPC
         echo "CONFIG_FIRMWARE_INCLUDE_FRPS=n" >> .config #内网穿透FRPS
         echo "CONFIG_FIRMWARE_INCLUDE_TUNSAFE=n" >> .config #TUNSAFE
-        echo "CONFIG_FIRMWARE_INCLUDE_ALIDDNS=y" >> .config #阿里DDNS
-        echo "CONFIG_FIRMWARE_INCLUDE_V2RAY=n" >> .config #集成v2ray执行文件（3.8M左右)，如果不集成，会从网上下载下来执行，不影响正常使用
-        echo "CONFIG_FIRMWARE_INCLUDE_TROJAN=n" >> .config #集成trojan执行文件(1.1M左右)，如果不集成，会从网上下载下来执行，不影响正常使用
-        echo "CONFIG_FIRMWARE_INCLUDE_CADDY=y" >> .config #caddy，在线文件管理服务
-        echo "CONFIG_FIRMWARE_INCLUDE_CADDYBIN=n" >> .config #集成caddy执行文件，此文件有13M,请注意固件大小。如果不集成，会从网上下载下来执行，不影响正常使用
-        echo "CONFIG_FIRMWARE_INCLUDE_HTTPS=y" >> .config #https
-        echo "CONFIG_FIRMWARE_INCLUDE_VLMCSD=n" >> .config #VLMCSD（KMS激活服务器）
-        
+        echo "CONFIG_FIRMWARE_INCLUDE_SOCAT=n" >> .config #socat
+        echo "CONFIG_FIRMWARE_INCLUDE_MTR=n" >> .config #MTR
+        echo "CONFIG_FIRMWARE_INCLUDE_RTL_SDR=n" >> .config #RTL_SDR
+        echo "CONFIG_FIRMWARE_INCLUDE_DUMP1090=n" >> .config #DUMP1090
+        echo "CONFIG_FIRMWARE_INCLUDE_IPERF3=n" >> .config #IPERF3
+        echo "CONFIG_FIRMWARE_INCLUDE_NANO=n" >> .config #NANO
+        echo "CONFIG_FIRMWARE_INCLUDE_HTOP=n" >> .config #HTOP
+        echo "CONFIG_FIRMWARE_INCLUDE_LRZSZ=n" >> .config #LRZSZ
+        echo "CONFIG_FIRMWARE_INCLUDE_TTYD=n" >> .config #TTYD
+
         #########################################################################################
         #自定义添加其它功能请参考源码configs/templates/目录下的config文件。按照上面的格式添加即可
         #格式如下：
