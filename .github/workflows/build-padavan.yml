@@ -54,16 +54,19 @@ jobs:
         ################################################################################################
         #常用的
         sed -i '/CONFIG_FIRMWARE_INCLUDE_HTTPS/d' .config ### 路由器https访问
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_ALIDDNS/d' .config ### 阿里DDNS
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_SHADOWSOCKS/d' .config ### SS plus+客户端
         sed -i '/CONFIG_FIRMWARE_INCLUDE_ADBYBY/d' .config ### 广告过滤，adbyby plus+
         sed -i '/CONFIG_FIRMWARE_INCLUDE_KOOLPROXY/d' .config ### 广告过滤，koolproxy
         sed -i '/CONFIG_FIRMWARE_INCLUDE_ADGUARDHOME/d' .config ### 广告过滤，adguardhome
-        sed -i '/CONFIG_FIRMWARE_INCLUDE_ALIDDNS/d' .config ### 阿里DDNS
-        sed -i '/CONFIG_FIRMWARE_INCLUDE_SHADOWSOCKS/d' .config ### SS plus+，客户端
         sed -i '/CONFIG_FIRMWARE_INCLUDE_V2RAY/d' .config ### v2ray
         sed -i '/CONFIG_FIRMWARE_INCLUDE_TROJAN/d' .config ### trojan
         sed -i '/CONFIG_FIRMWARE_INCLUDE_CADDY/d' .config ### 在线文件管理服务
         sed -i '/CONFIG_FIRMWARE_INCLUDE_CADDYBIN/d' .config ### 集成caddy执行文件
         sed -i '/CONFIG_FIRMWARE_INCLUDE_VLMCSD/d' .config ### VLMCSD（KMS激活服务器）
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_DNSFORWARDER/d' .config ### DNSFORWARDER，解析加速
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_SMARTDNS/d' .config ### smartdns，解析加速
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_SMARTDNSBIN/d' .config ### smartdns二进制文件
         #不常用
         sed -i '/CONFIG_FIRMWARE_INCLUDE_NJIT_CLIENT/d' .config ### 校园网相关 NJIT_CLIENT
         sed -i '/CONFIG_FIRMWARE_INCLUDE_SCUTCLIENT/d' .config ### 校园网相关 SCUTCLIENT
@@ -75,9 +78,6 @@ jobs:
         sed -i '/CONFIG_FIRMWARE_INCLUDE_SOFTETHERVPN_CLIENT/d' .config ### SOFTETHERVPN_CLIENT
         sed -i '/CONFIG_FIRMWARE_INCLUDE_SOFTETHERVPN_CMD/d' .config ### SOFTETHERVPN_CMD
         sed -i '/CONFIG_FIRMWARE_INCLUDE_SSSERVER/d' .config ### SS server，服务端
-        sed -i '/CONFIG_FIRMWARE_INCLUDE_DNSFORWARDER/d' .config ### DNSFORWARDER，解析加速
-        sed -i '/CONFIG_FIRMWARE_INCLUDE_SMARTDNS/d' .config ### smartdns，解析加速
-        sed -i '/CONFIG_FIRMWARE_INCLUDE_SMARTDNSBIN/d' .config ### smartdns二进制文件
         sed -i '/CONFIG_FIRMWARE_INCLUDE_KUMASOCKS/d' .config ### kumasocks，可以不集成
         sed -i '/CONFIG_FIRMWARE_INCLUDE_SRELAY/d' .config ### srelay，可以不集成
         sed -i '/CONFIG_FIRMWARE_INCLUDE_MICROSOCKS/d' .config ### microsocks
@@ -99,16 +99,19 @@ jobs:
         ######################################################################
         #常用的
         echo "CONFIG_FIRMWARE_INCLUDE_HTTPS=y" >> .config #路由器https访问
+        echo "CONFIG_FIRMWARE_INCLUDE_ALIDDNS=y" >> .config #阿里DDNS
+        echo "CONFIG_FIRMWARE_INCLUDE_SHADOWSOCKS=y" >> .config #SS plus+客户端
         echo "CONFIG_FIRMWARE_INCLUDE_ADBYBY=y" >> .config #广告过滤，adbyby plus+
         echo "CONFIG_FIRMWARE_INCLUDE_KOOLPROXY=y" >> .config #广告过滤，koolproxy
         echo "CONFIG_FIRMWARE_INCLUDE_ADGUARDHOME=n" >> .config #广告过滤，adguardhome
-        echo "CONFIG_FIRMWARE_INCLUDE_ALIDDNS=y" >> .config #阿里DDNS
-        echo "CONFIG_FIRMWARE_INCLUDE_SHADOWSOCKS=y" >> .config #SS plus+，客户端
         echo "CONFIG_FIRMWARE_INCLUDE_V2RAY=n" >> .config #集成v2ray执行文件（3.8M左右)，如果不集成，会从网上下载下来执行，不影响正常使用
         echo "CONFIG_FIRMWARE_INCLUDE_TROJAN=n" >> .config #集成trojan执行文件(1.1M左右)，如果不集成，会从网上下载下来执行，不影响正常使用
         echo "CONFIG_FIRMWARE_INCLUDE_CADDY=n" >> .config #caddy，在线文件管理服务
         echo "CONFIG_FIRMWARE_INCLUDE_CADDYBIN=n" >> .config #集成caddy执行文件，此文件有13M,请注意固件大小。如果不集成，会从网上下载下来执行，不影响正常使用
         echo "CONFIG_FIRMWARE_INCLUDE_VLMCSD=n" >> .config #VLMCSD（KMS激活服务器）
+        echo "CONFIG_FIRMWARE_INCLUDE_DNSFORWARDER=n" >> .config #DNSFORWARDER
+        echo "CONFIG_FIRMWARE_INCLUDE_SMARTDNS=n" >> .config #smartdns
+        echo "CONFIG_FIRMWARE_INCLUDE_SMARTDNSBIN=n" >> .config #smartdns二进制文件
         #不常用
         echo "CONFIG_FIRMWARE_INCLUDE_NJIT_CLIENT=n" >> .config #校园网相关 NJIT_CLIENT
         echo "CONFIG_FIRMWARE_INCLUDE_SCUTCLIENT=n" >> .config #校园网相关 SCUTCLIENT
@@ -120,9 +123,6 @@ jobs:
         echo "CONFIG_FIRMWARE_INCLUDE_SOFTETHERVPN_CLIENT=n" >> .config #SOFTETHERVPN_CLIENT
         echo "CONFIG_FIRMWARE_INCLUDE_SOFTETHERVPN_CMD=n" >> .config #SOFTETHERVPN_CMD
         echo "CONFIG_FIRMWARE_INCLUDE_SSSERVER=n" >> .config #SS server，服务端
-        echo "CONFIG_FIRMWARE_INCLUDE_DNSFORWARDER=n" >> .config #DNSFORWARDER
-        echo "CONFIG_FIRMWARE_INCLUDE_SMARTDNS=n" >> .config #smartdns
-        echo "CONFIG_FIRMWARE_INCLUDE_SMARTDNSBIN=n" >> .config #smartdns二进制文件
         echo "CONFIG_FIRMWARE_INCLUDE_KUMASOCKS=n" >> .config #kumasocks,可以不集成
         echo "CONFIG_FIRMWARE_INCLUDE_SRELAY=n" >> .config #srelay，可以不集成
         echo "CONFIG_FIRMWARE_INCLUDE_MICROSOCKS=n" >> .config #microsocks
