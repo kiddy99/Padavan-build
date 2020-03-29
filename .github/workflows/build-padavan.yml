@@ -40,7 +40,7 @@ jobs:
         mkdir -p /opt/images/
     - name: Build Firmware
       env:
-        TNAME: MI-NANO
+        TNAME: K2P
       run: |
         cd /opt/rt-n56u/trunk
         if [ ! -f configs/templates/$TNAME.config ] ; then
@@ -67,13 +67,13 @@ jobs:
         sed -i '/CONFIG_FIRMWARE_INCLUDE_DNSFORWARDER/d' .config ### DNSFORWARDER，解析加速
         sed -i '/CONFIG_FIRMWARE_INCLUDE_SMARTDNS/d' .config ### smartdns，解析加速
         sed -i '/CONFIG_FIRMWARE_INCLUDE_SMARTDNSBIN/d' .config ### smartdns二进制文件
-        #不常用
+        #不常用 
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_MENTOHUST/d' .config ### 校园网相关 MENTOHUST
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_MINIEAP/d' .config ### 校园网相关 MINIEAP
         sed -i '/CONFIG_FIRMWARE_INCLUDE_NJIT_CLIENT/d' .config ### 校园网相关 NJIT_CLIENT
         sed -i '/CONFIG_FIRMWARE_INCLUDE_SCUTCLIENT/d' .config ### 校园网相关 SCUTCLIENT
         sed -i '/CONFIG_FIRMWARE_INCLUDE_GDUT_DRCOM/d' .config ### 校园网相关 GDUT_DRCOM
-        sed -i '/CONFIG_FIRMWARE_INCLUDE_DOGCOM/d' .config ### 校园网相关 DOGCOM    
-        sed -i '/CONFIG_FIRMWARE_INCLUDE_MINIEAP/d' .config ### 校园网相关 MINIEAP
-        sed -i '/CONFIG_FIRMWARE_INCLUDE_MENTOHUST/d' .config ### MENTOHUST
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_DOGCOM/d' .config ### 校园网相关 DOGCOM
         sed -i '/CONFIG_FIRMWARE_INCLUDE_SOFTETHERVPN_SERVER/d' .config ### SOFTETHERVPN_SERVER
         sed -i '/CONFIG_FIRMWARE_INCLUDE_SOFTETHERVPN_CLIENT/d' .config ### SOFTETHERVPN_CLIENT
         sed -i '/CONFIG_FIRMWARE_INCLUDE_SOFTETHERVPN_CMD/d' .config ### SOFTETHERVPN_CMD
@@ -109,16 +109,16 @@ jobs:
         echo "CONFIG_FIRMWARE_INCLUDE_CADDY=n" >> .config #caddy，在线文件管理服务
         echo "CONFIG_FIRMWARE_INCLUDE_CADDYBIN=n" >> .config #集成caddy执行文件，此文件有13M,请注意固件大小。如果不集成，会从网上下载下来执行，不影响正常使用
         echo "CONFIG_FIRMWARE_INCLUDE_VLMCSD=n" >> .config #VLMCSD（KMS激活服务器）
-        echo "CONFIG_FIRMWARE_INCLUDE_DNSFORWARDER=n" >> .config #DNSFORWARDER
-        echo "CONFIG_FIRMWARE_INCLUDE_SMARTDNS=n" >> .config #smartdns
-        echo "CONFIG_FIRMWARE_INCLUDE_SMARTDNSBIN=n" >> .config #smartdns二进制文件
+        echo "CONFIG_FIRMWARE_INCLUDE_DNSFORWARDER=n" >> .config #DnsForwarder
+        echo "CONFIG_FIRMWARE_INCLUDE_SMARTDNS=n" >> .config #SmartDns服务
+        echo "CONFIG_FIRMWARE_INCLUDE_SMARTDNSBIN=n" >> .config #SmartDns执行文件，可以不集成，会从网上下载下来执行，不影响正常使用。
         #不常用
+        echo "CONFIG_FIRMWARE_INCLUDE_MENTOHUST=n" >> .config #校园网相关 MentoHUST ：华中科技大的朋友开发出来的一款第三方锐捷认证工具！
+        echo "CONFIG_FIRMWARE_INCLUDE_MINIEAP=n" >> .config #校园网相关 MiniEAP 相对于原来的 Mentohust 更容易适配各个学校，并受到 mentohust 原作者推荐。
         echo "CONFIG_FIRMWARE_INCLUDE_NJIT_CLIENT=n" >> .config #校园网相关 NJIT_CLIENT
         echo "CONFIG_FIRMWARE_INCLUDE_SCUTCLIENT=n" >> .config #校园网相关 SCUTCLIENT
         echo "CONFIG_FIRMWARE_INCLUDE_GDUT_DRCOM=n" >> .config #校园网相关 GDUT_DRCOM
         echo "CONFIG_FIRMWARE_INCLUDE_DOGCOM=n" >> .config #校园网相关 DOGCOM
-        echo "CONFIG_FIRMWARE_INCLUDE_MINIEAP=n" >> .config #校园网相关 MINIEAP
-        echo "CONFIG_FIRMWARE_INCLUDE_MENTOHUST=n" >> .config #MENTOHUST
         echo "CONFIG_FIRMWARE_INCLUDE_SOFTETHERVPN_SERVER=n" >> .config #SOFTETHERVPN_SERVER
         echo "CONFIG_FIRMWARE_INCLUDE_SOFTETHERVPN_CLIENT=n" >> .config #SOFTETHERVPN_CLIENT
         echo "CONFIG_FIRMWARE_INCLUDE_SOFTETHERVPN_CMD=n" >> .config #SOFTETHERVPN_CMD
