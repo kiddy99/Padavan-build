@@ -40,7 +40,7 @@ jobs:
         mkdir -p /opt/images/
     - name: Build Firmware
       env:
-        TNAME: K2P
+        TNAME: NEWIFI3
       run: |
         cd /opt/rt-n56u/trunk
         if [ ! -f configs/templates/$TNAME.config ] ; then
@@ -101,8 +101,8 @@ jobs:
         echo "CONFIG_FIRMWARE_INCLUDE_HTTPS=n" >> .config #路由器https访问
         echo "CONFIG_FIRMWARE_INCLUDE_ALIDDNS=n" >> .config #阿里DDNS
         echo "CONFIG_FIRMWARE_INCLUDE_SHADOWSOCKS=n" >> .config #SS plus+客户端
-        echo "CONFIG_FIRMWARE_INCLUDE_ADBYBY=y" >> .config #广告过滤，adbyby plus+
-        echo "CONFIG_FIRMWARE_INCLUDE_KOOLPROXY=y" >> .config #广告过滤，koolproxy
+        echo "CONFIG_FIRMWARE_INCLUDE_ADBYBY=n" >> .config #广告过滤，adbyby plus+
+        echo "CONFIG_FIRMWARE_INCLUDE_KOOLPROXY=n" >> .config #广告过滤，koolproxy
         echo "CONFIG_FIRMWARE_INCLUDE_ADGUARDHOME=n" >> .config #广告过滤，adguardhome
         echo "CONFIG_FIRMWARE_INCLUDE_V2RAY=n" >> .config #集成v2ray执行文件（3.8M左右)，如果不集成，会从网上下载下来执行，不影响正常使用
         echo "CONFIG_FIRMWARE_INCLUDE_TROJAN=n" >> .config #集成trojan执行文件(1.1M左右)，如果不集成，会从网上下载下来执行，不影响正常使用
@@ -110,7 +110,7 @@ jobs:
         echo "CONFIG_FIRMWARE_INCLUDE_CADDYBIN=n" >> .config #集成caddy执行文件，此文件有13M,请注意固件大小。如果不集成，会从网上下载下来执行，不影响正常使用
         echo "CONFIG_FIRMWARE_INCLUDE_VLMCSD=n" >> .config #VLMCSD（KMS激活服务器）
         echo "CONFIG_FIRMWARE_INCLUDE_DNSFORWARDER=n" >> .config #DnsForwarder
-        echo "CONFIG_FIRMWARE_INCLUDE_SMARTDNS=y" >> .config #SmartDns服务
+        echo "CONFIG_FIRMWARE_INCLUDE_SMARTDNS=n" >> .config #SmartDns服务
         echo "CONFIG_FIRMWARE_INCLUDE_SMARTDNSBIN=n" >> .config #SmartDns执行文件，可以不集成，会从网上下载下来执行，不影响正常使用。
         #不常用
         echo "CONFIG_FIRMWARE_INCLUDE_MENTOHUST=n" >> .config #校园网相关 MentoHUST ：华中科技大的朋友开发出来的一款第三方锐捷认证工具！
