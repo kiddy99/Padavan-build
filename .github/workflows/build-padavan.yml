@@ -40,7 +40,7 @@ jobs:
         mkdir -p /opt/images/
     - name: Build Firmware
       env:
-        TNAME: NEWIFI-MINI
+        TNAME: K2P-USB
       run: |
         cd /opt/rt-n56u/trunk
         if [ ! -f configs/templates/$TNAME.config ] ; then
@@ -98,20 +98,20 @@ jobs:
         #以下选项是定义你需要的功能（y=集成,n=忽略），重新写入到.config文件
         ######################################################################
         #常用的
-        echo "CONFIG_FIRMWARE_INCLUDE_HTTPS=n" >> .config #路由器https访问
-        echo "CONFIG_FIRMWARE_INCLUDE_ALIDDNS=n" >> .config #阿里DDNS
-        echo "CONFIG_FIRMWARE_INCLUDE_SHADOWSOCKS=n" >> .config #SS plus+客户端
-        echo "CONFIG_FIRMWARE_INCLUDE_ADBYBY=n" >> .config #广告过滤，adbyby plus+
-        echo "CONFIG_FIRMWARE_INCLUDE_KOOLPROXY=n" >> .config #广告过滤，koolproxy
+        echo "CONFIG_FIRMWARE_INCLUDE_HTTPS=y" >> .config #路由器https访问
+        echo "CONFIG_FIRMWARE_INCLUDE_ALIDDNS=y" >> .config #阿里DDNS
+        echo "CONFIG_FIRMWARE_INCLUDE_SHADOWSOCKS=y" >> .config #SS plus+客户端
+        echo "CONFIG_FIRMWARE_INCLUDE_ADBYBY=y" >> .config #广告过滤，adbyby plus+
+        echo "CONFIG_FIRMWARE_INCLUDE_KOOLPROXY=y" >> .config #广告过滤，koolproxy
         echo "CONFIG_FIRMWARE_INCLUDE_ADGUARDHOME=n" >> .config #广告过滤，adguardhome
         echo "CONFIG_FIRMWARE_INCLUDE_V2RAY=n" >> .config #集成v2ray执行文件（3.8M左右)，如果不集成，会从网上下载下来执行，不影响正常使用
-        echo "CONFIG_FIRMWARE_INCLUDE_TROJAN=n" >> .config #集成trojan执行文件(1.1M左右)，如果不集成，会从网上下载下来执行，不影响正常使用
+        echo "CONFIG_FIRMWARE_INCLUDE_TROJAN=y" >> .config #集成trojan执行文件(1.1M左右)，如果不集成，会从网上下载下来执行，不影响正常使用
         echo "CONFIG_FIRMWARE_INCLUDE_CADDY=n" >> .config #caddy，在线文件管理服务
         echo "CONFIG_FIRMWARE_INCLUDE_CADDYBIN=n" >> .config #集成caddy执行文件，此文件有13M,请注意固件大小。如果不集成，会从网上下载下来执行，不影响正常使用
         echo "CONFIG_FIRMWARE_INCLUDE_VLMCSD=n" >> .config #VLMCSD（KMS激活服务器）
         echo "CONFIG_FIRMWARE_INCLUDE_DNSFORWARDER=n" >> .config #DnsForwarder
-        echo "CONFIG_FIRMWARE_INCLUDE_SMARTDNS=n" >> .config #SmartDns服务
-        echo "CONFIG_FIRMWARE_INCLUDE_SMARTDNSBIN=n" >> .config #SmartDns执行文件，可以不集成，会从网上下载下来执行，不影响正常使用。
+        echo "CONFIG_FIRMWARE_INCLUDE_SMARTDNS=y" >> .config #SmartDns服务
+        echo "CONFIG_FIRMWARE_INCLUDE_SMARTDNSBIN=y" >> .config #SmartDns执行文件，可以不集成，会从网上下载下来执行，不影响正常使用。
         #不常用
         echo "CONFIG_FIRMWARE_INCLUDE_MENTOHUST=n" >> .config #校园网相关 MentoHUST ：华中科技大的朋友开发出来的一款第三方锐捷认证工具！
         echo "CONFIG_FIRMWARE_INCLUDE_MINIEAP=n" >> .config #校园网相关 MiniEAP 相对于原来的 Mentohust 更容易适配各个学校，并受到 mentohust 原作者推荐。
