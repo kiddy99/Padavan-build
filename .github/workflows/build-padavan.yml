@@ -137,7 +137,7 @@ jobs:
         echo "CONFIG_FIRMWARE_INCLUDE_NANO=n" >> .config #NANO
         echo "CONFIG_FIRMWARE_INCLUDE_HTOP=n" >> .config #HTOP
         echo "CONFIG_FIRMWARE_INCLUDE_LRZSZ=n" >> .config #LRZSZ
-        echo "CONFIG_FIRMWARE_INCLUDE_TTYD=n" >> .config #TTYD
+        echo "CONFIG_FIRMWARE_INCLUDE_TTYD=y" >> .config #TTYD
 
         #########################################################################################
         #自定义添加其它功能请参考源码configs/templates/目录下的config文件。按照上面的格式添加即可
