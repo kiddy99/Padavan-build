@@ -77,14 +77,30 @@ jobs:
         sed -i '/CONFIG_FIRMWARE_INCLUDE_SOFTETHERVPN_SERVER/d' .config ### SOFTETHERVPN_SERVER
         sed -i '/CONFIG_FIRMWARE_INCLUDE_SOFTETHERVPN_CLIENT/d' .config ### SOFTETHERVPN_CLIENT
         sed -i '/CONFIG_FIRMWARE_INCLUDE_SOFTETHERVPN_CMD/d' .config ### SOFTETHERVPN_CMD
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_SSSERVER/d' .config ### SS server，服务端
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_KUMASOCKS/d' .config ### kumasocks，可以不集成
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_SRELAY/d' .config ### srelay，可以不集成
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_MICROSOCKS/d' .config ### microsocks
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_FRPC/d' .config ### 内网穿透FRPC
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_FRPS/d' .config ### 内网穿透FRPS
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_TUNSAFE/d' .config ### TUNSAFE
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_SOCAT/d' .config ### socat
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_MTR/d' .config ### MTR
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_RTL_SDR/d' .config ### RTL_SDR
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_DUMP1090/d' .config ### DUMP1090
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_IPERF3/d' .config ### IPERF3
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_NANO/d' .config ### NANO
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_HTOP/d' .config ### HTOP
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_LRZSZ/d' .config ### LRZSZ
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_TTYD/d' .config ### TTYD
 
         ######################################################################
         #以下选项是定义你需要的功能（y=集成,n=忽略），重新写入到.config文件
         ######################################################################
         #常用的
-        echo "CONFIG_FIRMWARE_INCLUDE_HTTPS=y" >> .config #路由器https访问
-        echo "CONFIG_FIRMWARE_INCLUDE_ALIDDNS=y" >> .config #阿里DDNS
-        echo "CONFIG_FIRMWARE_INCLUDE_SHADOWSOCKS=y" >> .config #SS plus+客户端
+        echo "CONFIG_FIRMWARE_INCLUDE_HTTPS=n" >> .config #路由器https访问
+        echo "CONFIG_FIRMWARE_INCLUDE_ALIDDNS=n" >> .config #阿里DDNS
+        echo "CONFIG_FIRMWARE_INCLUDE_SHADOWSOCKS=n" >> .config #SS plus+客户端
         echo "CONFIG_FIRMWARE_INCLUDE_ADBYBY=y" >> .config #广告过滤，adbyby plus+
         echo "CONFIG_FIRMWARE_INCLUDE_KOOLPROXY=y" >> .config #广告过滤，koolproxy
         echo "CONFIG_FIRMWARE_INCLUDE_ADGUARDHOME=n" >> .config #广告过滤，adguardhome
@@ -93,7 +109,7 @@ jobs:
         echo "CONFIG_FIRMWARE_INCLUDE_CADDY=n" >> .config #caddy，在线文件管理服务
         echo "CONFIG_FIRMWARE_INCLUDE_CADDYBIN=n" >> .config #集成caddy执行文件，此文件有13M,请注意固件大小。如果不集成，会从网上下载下来执行，不影响正常使用
         echo "CONFIG_FIRMWARE_INCLUDE_VLMCSD=n" >> .config #VLMCSD（KMS激活服务器）
-        echo "CONFIG_FIRMWARE_INCLUDE_DNSFORWARDER=y" >> .config #DnsForwarder
+        echo "CONFIG_FIRMWARE_INCLUDE_DNSFORWARDER=n" >> .config #DnsForwarder
         echo "CONFIG_FIRMWARE_INCLUDE_SMARTDNS=y" >> .config #SmartDns服务
         echo "CONFIG_FIRMWARE_INCLUDE_SMARTDNSBIN=n" >> .config #SmartDns执行文件，可以不集成，会从网上下载下来执行，不影响正常使用。
         #不常用
@@ -106,6 +122,22 @@ jobs:
         echo "CONFIG_FIRMWARE_INCLUDE_SOFTETHERVPN_SERVER=n" >> .config #SOFTETHERVPN_SERVER
         echo "CONFIG_FIRMWARE_INCLUDE_SOFTETHERVPN_CLIENT=n" >> .config #SOFTETHERVPN_CLIENT
         echo "CONFIG_FIRMWARE_INCLUDE_SOFTETHERVPN_CMD=n" >> .config #SOFTETHERVPN_CMD
+        echo "CONFIG_FIRMWARE_INCLUDE_SSSERVER=n" >> .config #SS server，服务端
+        echo "CONFIG_FIRMWARE_INCLUDE_KUMASOCKS=n" >> .config #kumasocks,可以不集成
+        echo "CONFIG_FIRMWARE_INCLUDE_SRELAY=n" >> .config #srelay，可以不集成
+        echo "CONFIG_FIRMWARE_INCLUDE_MICROSOCKS=n" >> .config #microsocks
+        echo "CONFIG_FIRMWARE_INCLUDE_FRPC=n" >> .config #内网穿透FRPC
+        echo "CONFIG_FIRMWARE_INCLUDE_FRPS=n" >> .config #内网穿透FRPS
+        echo "CONFIG_FIRMWARE_INCLUDE_TUNSAFE=n" >> .config #TUNSAFE
+        echo "CONFIG_FIRMWARE_INCLUDE_SOCAT=n" >> .config #socat
+        echo "CONFIG_FIRMWARE_INCLUDE_MTR=n" >> .config #MTR
+        echo "CONFIG_FIRMWARE_INCLUDE_RTL_SDR=n" >> .config #RTL_SDR
+        echo "CONFIG_FIRMWARE_INCLUDE_DUMP1090=n" >> .config #DUMP1090
+        echo "CONFIG_FIRMWARE_INCLUDE_IPERF3=n" >> .config #IPERF3
+        echo "CONFIG_FIRMWARE_INCLUDE_NANO=n" >> .config #NANO
+        echo "CONFIG_FIRMWARE_INCLUDE_HTOP=n" >> .config #HTOP
+        echo "CONFIG_FIRMWARE_INCLUDE_LRZSZ=n" >> .config #LRZSZ
+        echo "CONFIG_FIRMWARE_INCLUDE_TTYD=n" >> .config #TTYD
 
         #########################################################################################
         #自定义添加其它功能请参考源码configs/templates/目录下的config文件。按照上面的格式添加即可
