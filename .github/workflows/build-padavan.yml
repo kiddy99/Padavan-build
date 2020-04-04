@@ -108,7 +108,7 @@ jobs:
         echo "CONFIG_FIRMWARE_INCLUDE_SHADOWSOCKS=y" >> .config #SS plus+客户端
         echo "CONFIG_FIRMWARE_INCLUDE_V2RAY=n" >> .config #集成v2ray执行文件（3.8M左右)，如果不集成，会从网上下载下来执行，不影响正常使用
         echo "CONFIG_FIRMWARE_INCLUDE_TROJAN=n" >> .config #集成trojan执行文件(1.1M左右)，如果不集成，会从网上下载下来执行，不影响正常使用
-        echo "CONFIG_FIRMWARE_INCLUDE_MICROSOCKS=y" >> .config #microsocks
+        echo "CONFIG_FIRMWARE_INCLUDE_MICROSOCKS=n" >> .config #microsocks
         echo "CONFIG_FIRMWARE_INCLUDE_KUMASOCKS=n" >> .config #kumasocks,可以不集成        
         echo "CONFIG_FIRMWARE_INCLUDE_CADDY=n" >> .config #caddy，在线文件管理服务
         echo "CONFIG_FIRMWARE_INCLUDE_CADDYBIN=n" >> .config #集成caddy执行文件，此文件有13M,请注意固件大小。如果不集成，会从网上下载下来执行，不影响正常使用
@@ -130,11 +130,11 @@ jobs:
         echo "CONFIG_FIRMWARE_INCLUDE_LRZSZ=n" >> .config #LRZSZ
         echo "CONFIG_FIRMWARE_INCLUDE_RTL_SDR=n" >> .config #RTL_SDR
         echo "CONFIG_FIRMWARE_INCLUDE_DUMP1090=n" >> .config #DUMP1090        
-        echo "CONFIG_FIRMWARE_INCLUDE_SOCAT=y" >> .config #socat
-        echo "CONFIG_FIRMWARE_INCLUDE_MTR=y" >> .config #MTR
-        echo "CONFIG_FIRMWARE_INCLUDE_IPERF3=y" >> .config #IPERF3
-        echo "CONFIG_FIRMWARE_INCLUDE_NANO=y" >> .config #NANO
-        echo "CONFIG_FIRMWARE_INCLUDE_HTOP=y" >> .config #HTOP
+        echo "CONFIG_FIRMWARE_INCLUDE_SOCAT=n" >> .config #socat
+        echo "CONFIG_FIRMWARE_INCLUDE_MTR=n" >> .config #MTR
+        echo "CONFIG_FIRMWARE_INCLUDE_IPERF3=n" >> .config #IPERF3
+        echo "CONFIG_FIRMWARE_INCLUDE_NANO=n" >> .config #NANO
+        echo "CONFIG_FIRMWARE_INCLUDE_HTOP=n" >> .config #HTOP
         
         #########################################################################################
         #自定义添加其它功能请参考源码configs/templates/目录下的config文件。按照上面的格式添加即可
