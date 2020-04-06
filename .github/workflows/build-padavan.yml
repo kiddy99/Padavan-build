@@ -9,8 +9,8 @@ on:
     - 'v*'
   #  branches: 
   #    - master
-#  schedule:
-#    - cron: 0 8 * * 5
+  #  schedule:
+  #    - cron: 0 8 * * 5
   watch:
     types: [started]
 
@@ -40,7 +40,7 @@ jobs:
         mkdir -p /opt/images/
     - name: Build Firmware
       env:
-        TNAME: K2P-USB
+        TNAME: K2P
       run: |
         cd /opt/rt-n56u/trunk
         if [ ! -f configs/templates/$TNAME.config ] ; then
@@ -65,11 +65,11 @@ jobs:
         sed -i '/CONFIG_FIRMWARE_INCLUDE_V2RAY/d' .config ### v2ray
         sed -i '/CONFIG_FIRMWARE_INCLUDE_TROJAN/d' .config ### trojan
         sed -i '/CONFIG_FIRMWARE_INCLUDE_MICROSOCKS/d' .config ### microsocks
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_KUMASOCKS/d' .config ### kumasocks，可以不集成
         sed -i '/CONFIG_FIRMWARE_INCLUDE_CADDY/d' .config ### 在线文件管理服务
         sed -i '/CONFIG_FIRMWARE_INCLUDE_CADDYBIN/d' .config ### 集成caddy执行文件
         sed -i '/CONFIG_FIRMWARE_INCLUDE_VLMCSD/d' .config ### VLMCSD（KMS激活服务器）
         sed -i '/CONFIG_FIRMWARE_INCLUDE_SSSERVER/d' .config ### SS server，服务端
-        sed -i '/CONFIG_FIRMWARE_INCLUDE_KUMASOCKS/d' .config ### kumasocks，可以不集成
         sed -i '/CONFIG_FIRMWARE_INCLUDE_SRELAY/d' .config ### srelay，可以不集成
         sed -i '/CONFIG_FIRMWARE_INCLUDE_FRPC/d' .config ### 内网穿透FRPC
         sed -i '/CONFIG_FIRMWARE_INCLUDE_FRPS/d' .config ### 内网穿透FRPS
@@ -102,8 +102,8 @@ jobs:
         echo "CONFIG_FIRMWARE_INCLUDE_ADBYBY=y" >> .config #广告过滤，adbyby plus+
         echo "CONFIG_FIRMWARE_INCLUDE_KOOLPROXY=y" >> .config #广告过滤，koolproxy
         echo "CONFIG_FIRMWARE_INCLUDE_ADGUARDHOME=n" >> .config #广告过滤，adguardhome        
-        echo "CONFIG_FIRMWARE_INCLUDE_SMARTDNS=y" >> .config #SmartDns服务
-        echo "CONFIG_FIRMWARE_INCLUDE_SMARTDNSBIN=y" >> .config #SmartDns执行文件，可以不集成，会从网上下载下来执行，不影响正常使用。 
+        echo "CONFIG_FIRMWARE_INCLUDE_SMARTDNS=n" >> .config #SmartDns服务
+        echo "CONFIG_FIRMWARE_INCLUDE_SMARTDNSBIN=n" >> .config #SmartDns执行文件，可以不集成，会从网上下载下来执行，不影响正常使用。 
         echo "CONFIG_FIRMWARE_INCLUDE_DNSFORWARDER=n" >> .config #dns forwarder
         echo "CONFIG_FIRMWARE_INCLUDE_SHADOWSOCKS=y" >> .config #SS plus+客户端
         echo "CONFIG_FIRMWARE_INCLUDE_V2RAY=n" >> .config #集成v2ray执行文件（3.8M左右)，如果不集成，会从网上下载下来执行，不影响正常使用
