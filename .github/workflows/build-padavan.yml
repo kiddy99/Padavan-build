@@ -149,7 +149,7 @@ jobs:
         echo "CONFIG_FIRMWARE_INCLUDE_SMARTDNSBIN=n" >> .config  #SmartDns执行文件，可以不集成，会从网上下载下来执行，不影响正常使用。 
         echo "CONFIG_FIRMWARE_INCLUDE_DNSFORWARDER=n" >> .config #dns forwarder
         #科学上网
-        echo "CONFIG_FIRMWARE_INCLUDE_SHADOWSOCKS=n" >> .config #SS plus+客户端
+        echo "CONFIG_FIRMWARE_INCLUDE_SHADOWSOCKS=y" >> .config #SS plus+客户端
         echo "CONFIG_FIRMWARE_INCLUDE_SSSERVER=n" >> .config    #SS server，服务端
         echo "CONFIG_FIRMWARE_INCLUDE_V2RAY=n" >> .config       #集成v2ray 执行文件(3.8M左右)，如果不集成，会从网上下载下来执行，不影响正常使用
         echo "CONFIG_FIRMWARE_INCLUDE_TROJAN=n" >> .config      #集成trojan执行文件(1.1M左右)，如果不集成，会从网上下载下来执行，不影响正常使用
@@ -165,8 +165,8 @@ jobs:
         echo "CONFIG_FIRMWARE_INCLUDE_SOFTETHERVPN_CLIENT=n" >> .config #softethervpn_client，不需要集成
         echo "CONFIG_FIRMWARE_INCLUDE_SOFTETHERVPN_CMD=n" >> .config    #softethervpn_cmd，不需要集成
         echo "CONFIG_FIRMWARE_INCLUDE_TUNSAFE=n" >> .config             #tunsafe vpn，不需要集成
-        echo "CONFIG_FIRMWARE_INCLUDE_MICROSOCKS=n" >> .config          #microsocks
-        echo "CONFIG_FIRMWARE_INCLUDE_KUMASOCKS=n" >> .config           #kumasocks,可以不集成
+        echo "CONFIG_FIRMWARE_INCLUDE_MICROSOCKS=n" >> .config          #microsocks，可以不集成
+        echo "CONFIG_FIRMWARE_INCLUDE_KUMASOCKS=n" >> .config           #kumasocks，可以不集成
         echo "CONFIG_FIRMWARE_INCLUDE_SOCAT=n" >> .config               #Socket CAT的主要特点就是在两个数据流之间建立通道，且支持众多协议和链接方式。
         echo "CONFIG_FIRMWARE_INCLUDE_SRELAY=n" >> .config              #srelay，可以不集成
         echo "CONFIG_FIRMWARE_INCLUDE_LRZSZ=n" >> .config               #lrzsz是一款在linux里可代替ftp上传和下载的程序，可以不集成
