@@ -40,7 +40,7 @@ jobs:
         mkdir -p /opt/images/
     - name: Build Firmware
       env:
-        TNAME: K2P
+        TNAME: K2P-USB
       run: |
         cd /opt/rt-n56u/trunk
         if [ ! -f configs/templates/$TNAME.config ] ; then
@@ -114,6 +114,7 @@ jobs:
         sed -i '/CONFIG_FIRMWARE_INCLUDE_RTL_SDR/d' .config  ### RTL_SDR
         sed -i '/CONFIG_FIRMWARE_INCLUDE_DUMP1090/d' .config ### DUMP1090
 
+
         ######################################################################
         #以下选项是定义你需要的功能（y=集成,n=忽略），重新写入到.config文件
         ######################################################################
@@ -131,18 +132,18 @@ jobs:
         echo "CONFIG_FIRMWARE_INCLUDE_FRPS=n" >> .config     #内网穿透frps
         #去广告
         echo "CONFIG_FIRMWARE_INCLUDE_ADBYBY=y" >> .config      #广告过滤，adbyby plus+
-        echo "CONFIG_FIRMWARE_INCLUDE_KOOLPROXY=n" >> .config   #广告过滤，koolproxy
+        echo "CONFIG_FIRMWARE_INCLUDE_KOOLPROXY=y" >> .config   #广告过滤，koolproxy
         echo "CONFIG_FIRMWARE_INCLUDE_ADGUARDHOME=n" >> .config #广告过滤，adguardhome
         #USB相关、下载软件
-        echo "CONFIG_FIRMWARE_INCLUDE_SMBD=n" >> .config            #开启smaba和WINS服务
-        echo "CONFIG_FIRMWARE_INCLUDE_SMBD36=n" >> .config          #升级samba3为smaba3.6
-        echo "CONFIG_FIRMWARE_INCLUDE_FTPD=n" >> .config            #开启FTP服务器
-        echo "CONFIG_FIRMWARE_INCLUDE_CADDY=n" >> .config           #caddy，在线文件管理服务
+        echo "CONFIG_FIRMWARE_INCLUDE_SMBD=y" >> .config            #开启smaba和WINS服务
+        echo "CONFIG_FIRMWARE_INCLUDE_SMBD36=y" >> .config          #升级samba3为smaba3.6
+        echo "CONFIG_FIRMWARE_INCLUDE_FTPD=y" >> .config            #开启FTP服务器
+        echo "CONFIG_FIRMWARE_INCLUDE_CADDY=y" >> .config           #caddy，在线文件管理服务
         echo "CONFIG_FIRMWARE_INCLUDE_CADDYBIN=n" >> .config        #集成caddy执行文件，此文件有13M,请注意固件大小。如果不集成，会从网上下载下来执行，不影响正常使用
         echo "CONFIG_FIRMWARE_INCLUDE_TRANSMISSION=n" >> .config    #transmission服务 ~1.5MB
         echo "CONFIG_FIRMWARE_INCLUDE_TRANSMISSION_WEB_CONTROL=n" >> .config  #transmission网页端 ~0.8MB
-        echo "CONFIG_FIRMWARE_INCLUDE_ARIA=n" >> .config                      #aria服务 ~3.5MB
-        echo "CONFIG_FIRMWARE_INCLUDE_ARIA_WEB_CONTROL=n" >> .config          #aira网页端 ~0.7MB
+        echo "CONFIG_FIRMWARE_INCLUDE_ARIA=y" >> .config                      #aria服务 ~3.5MB
+        echo "CONFIG_FIRMWARE_INCLUDE_ARIA_WEB_CONTROL=y" >> .config          #aira网页端 ~0.7MB
         #DNS加速服务
         echo "CONFIG_FIRMWARE_INCLUDE_SMARTDNS=n" >> .config     #SmartDns服务
         echo "CONFIG_FIRMWARE_INCLUDE_SMARTDNSBIN=n" >> .config  #SmartDns执行文件，可以不集成，会从网上下载下来执行，不影响正常使用。 
