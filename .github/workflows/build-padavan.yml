@@ -1,5 +1,5 @@
 #修改TNAME: K2P-5.0 中的K2P-5.0为你需要编译的型号，注意名称要与configs/templates/目录下的名字相同
-name: Build Padavan K2P
+name: Build Padavan
 
 on: 
   release:
@@ -101,17 +101,18 @@ jobs:
         sed -i '/CONFIG_FIRMWARE_INCLUDE_SOFTETHERVPN_SERVER/d' .config ### SOFTETHERVPN_SERVER
         sed -i '/CONFIG_FIRMWARE_INCLUDE_SOFTETHERVPN_CLIENT/d' .config ### SOFTETHERVPN_CLIENT
         sed -i '/CONFIG_FIRMWARE_INCLUDE_SOFTETHERVPN_CMD/d' .config    ### SOFTETHERVPN_CMD
-        sed -i '/CONFIG_FIRMWARE_INCLUDE_TUNSAFE/d' .config ### tunsafe vpn
-        sed -i '/CONFIG_FIRMWARE_INCLUDE_MICROSOCKS/d' .config ### microsocks
-        sed -i '/CONFIG_FIRMWARE_INCLUDE_KUMASOCKS/d' .config ### kumasocks，可以不集成
-        sed -i '/CONFIG_FIRMWARE_INCLUDE_SRELAY/d' .config ### srelay，可以不集成
-        sed -i '/CONFIG_FIRMWARE_INCLUDE_LRZSZ/d' .config ### LRZSZ
-        sed -i '/CONFIG_FIRMWARE_INCLUDE_RTL_SDR/d' .config ### RTL_SDR
-        sed -i '/CONFIG_FIRMWARE_INCLUDE_DUMP1090/d' .config ### DUMP1090        
-        sed -i '/CONFIG_FIRMWARE_INCLUDE_SOCAT/d' .config ### socat
-        sed -i '/CONFIG_FIRMWARE_INCLUDE_MTR/d' .config ### MTR
-        sed -i '/CONFIG_FIRMWARE_INCLUDE_OPENSSL_EXE/d' .config ### openssl_exe 自动生成证书服务
-        sed -i '/CONFIG_FIRMWARE_INCLUDE_NAPT66/d' .config ### NAPT66是北邮学生开发的在较旧内核的Linux上实现ipv6 nat的内核模块
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_TUNSAFE/d' .config             ### tunsafe vpn
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_MICROSOCKS/d' .config          ### microsocks
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_KUMASOCKS/d' .config           ### kumasocks，可以不集成
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_SOCAT/d' .config               ### Socket CAT
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_SRELAY/d' .config              ### srelay，可以不集成
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_LRZSZ/d' .config               ### LRZSZ，linux系统中类FTP的软件。
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_MTR/d' .config                 ### MTR，网络分析工具。
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_OPENSSL_EXE/d' .config         ### openssl_exe 自动生成证书服务
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_NAPT66/d' .config              ### NAPT66是北邮学生开发的在较旧内核的Linux上实现ipv6 nat的内核模块
+        #电视棒
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_RTL_SDR/d' .config  ### RTL_SDR
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_DUMP1090/d' .config ### DUMP1090
 
         ######################################################################
         #以下选项是定义你需要的功能（y=集成,n=忽略），重新写入到.config文件
@@ -165,14 +166,15 @@ jobs:
         echo "CONFIG_FIRMWARE_INCLUDE_TUNSAFE=n" >> .config             #tunsafe vpn，不需要集成
         echo "CONFIG_FIRMWARE_INCLUDE_MICROSOCKS=n" >> .config          #microsocks
         echo "CONFIG_FIRMWARE_INCLUDE_KUMASOCKS=n" >> .config           #kumasocks,可以不集成
+        echo "CONFIG_FIRMWARE_INCLUDE_SOCAT=n" >> .config               #Socket CAT的主要特点就是在两个数据流之间建立通道，且支持众多协议和链接方式。
         echo "CONFIG_FIRMWARE_INCLUDE_SRELAY=n" >> .config              #srelay，可以不集成
         echo "CONFIG_FIRMWARE_INCLUDE_LRZSZ=n" >> .config               #lrzsz是一款在linux里可代替ftp上传和下载的程序，可以不集成
+        echo "CONFIG_FIRMWARE_INCLUDE_MTR=n" >> .config                 #MTR是一款非常好用的网络分析工具，使管理员能够诊断和隔离网络错误。
+        echo "CONFIG_FIRMWARE_INCLUDE_OPENSSL_EXE=n" >> .config         #openssl_exe 自动生成证书服务
+        echo "CONFIG_FIRMWARE_INCLUDE_NAPT66=n" >> .config              #napt66是北邮学生开发的在较旧内核的Linux上实现ipv6 nat的内核模块
+        #USB电视棒服务
         echo "CONFIG_FIRMWARE_INCLUDE_RTL_SDR=n" >> .config             #支持RTL-SDR电视棒服务,需USB电视棒硬件支持，不需要集成
         echo "CONFIG_FIRMWARE_INCLUDE_DUMP1090=n" >> .config            #dump1090是专门为RTL-SDR设备设计的S模式解码器。这个程序可以配合电视棒实时在google map上显示飞机位置和飞行方向
-        echo "CONFIG_FIRMWARE_INCLUDE_SOCAT=n" >> .config               #「Socket CAT」的主要特点就是在两个数据流之间建立通道，且支持众多协议和链接方式。
-        echo "CONFIG_FIRMWARE_INCLUDE_MTR=n" >> .config                 # MTR-一款非常好用的网络分析工具，使管理员能够诊断和隔离网络错误,并向上游提供商提供网络状态报告。
-        echo "CONFIG_FIRMWARE_INCLUDE_OPENSSL_EXE=n" >> .config         #openssl_exe 自动生成证书服务
-        echo "CONFIG_FIRMWARE_INCLUDE_NAPT66=n" >> .config              #natp66
 
         #########################################################################################
         #自定义添加其它功能请参考源码configs/templates/目录下的config文件。按照上面的格式添加即可
