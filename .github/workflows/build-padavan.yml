@@ -58,8 +58,8 @@ jobs:
         #系统服务
         sed -i '/CONFIG_FIRMWARE_INCLUDE_HTTPS/d' .config    ### 路由器https访问
         sed -i '/CONFIG_FIRMWARE_INCLUDE_CURL/d' .config     ### 利用URL语法在命令行下工作的文件传输工具
-        sed -i '/CONFIG_FIRMWARE_INCLUDE_TTYD/d' .config     ### 浏览器的web shell工具
         sed -i '/CONFIG_FIRMWARE_INCLUDE_HTOP/d' .config     ### HTOP 类top进程查看工具
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_TTYD/d' .config     ### 浏览器的web shell工具
         sed -i '/CONFIG_FIRMWARE_INCLUDE_NANO/d' .config     ### NANO 文本编辑小工具
         sed -i '/CONFIG_FIRMWARE_INCLUDE_IPERF3/d' .config   ### IPERF3 测速工具
         sed -i '/CONFIG_FIRMWARE_INCLUDE_VLMCSD/d' .config   ### VLMCSD（KMS激活服务器）
@@ -74,7 +74,7 @@ jobs:
         #USB相关、下载软件
         sed -i '/CONFIG_FIRMWARE_INCLUDE_SMBD/d' .config            ### smaba和WINS服务
         sed -i '/CONFIG_FIRMWARE_INCLUDE_SMBD36/d' .config          ### 升级samba3为smaba3.6
-        sed -i '/CONFIG_FIRMWARE_INCLUDE_FTPD/d' .config            ### FTP服务器	
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_FTPD/d' .config            ### FTP服务器
         sed -i '/CONFIG_FIRMWARE_INCLUDE_CADDY/d' .config           ### 在线文件管理服务
         sed -i '/CONFIG_FIRMWARE_INCLUDE_CADDYBIN/d' .config        ### 集成caddy执行文件
         sed -i '/CONFIG_FIRMWARE_INCLUDE_TRANSMISSION/d' .config    ### transmission服务~1.5M
@@ -121,8 +121,8 @@ jobs:
         #系统相关
         echo "CONFIG_FIRMWARE_INCLUDE_HTTPS=y" >> .config    #路由器https访问（必须）
         echo "CONFIG_FIRMWARE_INCLUDE_CURL=y" >> .config     #利用URL语法在命令行下工作的文件传输工具（必须）
-        echo "CONFIG_FIRMWARE_INCLUDE_TTYD=y" >> .config     #浏览器的web shell工具（最好集成）
-        echo "CONFIG_FIRMWARE_INCLUDE_HTOP=y" >> .config     #htop 是Linux系统中的一个互动的进程查看器，与Linux传统的top相比，htop更加人性化。top太老了,推荐集成。
+        echo "CONFIG_FIRMWARE_INCLUDE_HTOP=y" >> .config     #htop 是Linux系统中的一个互动的进程查看器，与Linux传统的top相比，htop更加人性化（按需要集成）。
+        echo "CONFIG_FIRMWARE_INCLUDE_TTYD=n" >> .config     #浏览器的web shell工具（按需要集成）
         echo "CONFIG_FIRMWARE_INCLUDE_NANO=n" >> .config     #nano 是一个小型好用的文本编辑器，（按需求集成）。
         echo "CONFIG_FIRMWARE_INCLUDE_IPERF3=n" >> .config   #iperf3 是一个网络速度测试工具,支持IPv4与IPv6,支持TCP、UDP、SCTP传输协议，（按需求集成）。
         echo "CONFIG_FIRMWARE_INCLUDE_VLMCSD=n" >> .config   #KMS激活服务器，（按需求集成）
@@ -145,7 +145,7 @@ jobs:
         echo "CONFIG_FIRMWARE_INCLUDE_ARIA=y" >> .config                      #aria 服务 ~3.5MB
         echo "CONFIG_FIRMWARE_INCLUDE_ARIA_WEB_CONTROL=y" >> .config          #aira 网页端 ~0.7MB
         #DNS加速服务
-        echo "CONFIG_FIRMWARE_INCLUDE_SMARTDNS=y" >> .config     #SmartDns 服务
+        echo "CONFIG_FIRMWARE_INCLUDE_SMARTDNS=n" >> .config     #SmartDns 服务
         echo "CONFIG_FIRMWARE_INCLUDE_SMARTDNSBIN=n" >> .config  #SmartDns 执行文件，可以不集成，会从网上下载下来执行，不影响正常使用。 
         echo "CONFIG_FIRMWARE_INCLUDE_DNSFORWARDER=n" >> .config #dnsForwarder
         #科学上网
