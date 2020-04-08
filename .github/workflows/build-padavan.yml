@@ -40,7 +40,7 @@ jobs:
         mkdir -p /opt/images/
     - name: Build Firmware
       env:
-        TNAME: K2P-USB
+        TNAME: K2P
       run: |
         cd /opt/rt-n56u/trunk
         if [ ! -f configs/templates/$TNAME.config ] ; then
@@ -87,7 +87,7 @@ jobs:
         sed -i '/CONFIG_FIRMWARE_INCLUDE_DNSFORWARDER/d' .config ### dnsforwarder
         #科学上网
         sed -i '/CONFIG_FIRMWARE_INCLUDE_SHADOWSOCKS/d' .config ### SS plus+ ,客户端
-        sed -i '/CONFIG_FIRMWARE_INCLUDE_MICROSOCKS/d' .config  ### microsocks，sock5代理软件
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_MICROSOCKS/d' .config  ### microsocks，SOCK5代理服务器，如果你想把梯子共享给其他人
         sed -i '/CONFIG_FIRMWARE_INCLUDE_SSSERVER/d' .config    ### SS server,服务端
         sed -i '/CONFIG_FIRMWARE_INCLUDE_V2RAY/d' .config       ### v2ray 执行文件，不集成会从网上下载
         sed -i '/CONFIG_FIRMWARE_INCLUDE_TROJAN/d' .config      ### trojan执行文件，不集成会从网上下载
@@ -131,25 +131,25 @@ jobs:
         echo "CONFIG_FIRMWARE_INCLUDE_FRPS=n" >> .config     #内网穿透frps
         #去广告
         echo "CONFIG_FIRMWARE_INCLUDE_ADBYBY=y" >> .config      #广告过滤，adbyby plus+
-        echo "CONFIG_FIRMWARE_INCLUDE_KOOLPROXY=y" >> .config   #广告过滤，koolproxy
+        echo "CONFIG_FIRMWARE_INCLUDE_KOOLPROXY=n" >> .config   #广告过滤，koolproxy
         echo "CONFIG_FIRMWARE_INCLUDE_ADGUARDHOME=n" >> .config #广告过滤，adguardhome
         #USB相关、下载软件
-        echo "CONFIG_FIRMWARE_INCLUDE_SMBD=y" >> .config            #开启smaba和WINS服务
-        echo "CONFIG_FIRMWARE_INCLUDE_SMBD36=y" >> .config          #升级samba3为smaba3.6
-        echo "CONFIG_FIRMWARE_INCLUDE_FTPD=y" >> .config            #开启FTP服务器
+        echo "CONFIG_FIRMWARE_INCLUDE_SMBD=n" >> .config            #开启smaba和WINS服务
+        echo "CONFIG_FIRMWARE_INCLUDE_SMBD36=n" >> .config          #升级samba3为smaba3.6
+        echo "CONFIG_FIRMWARE_INCLUDE_FTPD=n" >> .config            #开启FTP服务器
         echo "CONFIG_FIRMWARE_INCLUDE_CADDY=n" >> .config           #caddy，在线文件管理服务
         echo "CONFIG_FIRMWARE_INCLUDE_CADDYBIN=n" >> .config        #集成caddy执行文件，此文件有13M,请注意固件大小。如果不集成，会从网上下载下来执行，不影响正常使用
         echo "CONFIG_FIRMWARE_INCLUDE_TRANSMISSION=n" >> .config    #transmission服务 ~1.5MB
         echo "CONFIG_FIRMWARE_INCLUDE_TRANSMISSION_WEB_CONTROL=n" >> .config  #transmission网页端 ~0.8MB
-        echo "CONFIG_FIRMWARE_INCLUDE_ARIA=y" >> .config                      #aria服务 ~3.5MB
-        echo "CONFIG_FIRMWARE_INCLUDE_ARIA_WEB_CONTROL=y" >> .config          #aira网页端 ~0.7MB
+        echo "CONFIG_FIRMWARE_INCLUDE_ARIA=n" >> .config                      #aria服务 ~3.5MB
+        echo "CONFIG_FIRMWARE_INCLUDE_ARIA_WEB_CONTROL=n" >> .config          #aira网页端 ~0.7MB
         #DNS加速服务
         echo "CONFIG_FIRMWARE_INCLUDE_SMARTDNS=n" >> .config     #SmartDns服务
         echo "CONFIG_FIRMWARE_INCLUDE_SMARTDNSBIN=n" >> .config  #SmartDns执行文件，可以不集成，会从网上下载下来执行，不影响正常使用。 
         echo "CONFIG_FIRMWARE_INCLUDE_DNSFORWARDER=n" >> .config #dns forwarder
         #科学上网
-        echo "CONFIG_FIRMWARE_INCLUDE_SHADOWSOCKS=y" >> .config #SS plus+，客户端
-        echo "CONFIG_FIRMWARE_INCLUDE_MICROSOCKS=y" >> .config  #microsocks，sock5代理，如果想把梯子共享给其他人使用。
+        echo "CONFIG_FIRMWARE_INCLUDE_SHADOWSOCKS=n" >> .config #SS plus+，客户端
+        echo "CONFIG_FIRMWARE_INCLUDE_MICROSOCKS=n" >> .config  #microsocks，SOCK5代理服务器，如果你想把梯子共享给其他人
         echo "CONFIG_FIRMWARE_INCLUDE_SSSERVER=n" >> .config    #SS server，服务端
         echo "CONFIG_FIRMWARE_INCLUDE_V2RAY=n" >> .config       #集成v2ray 执行文件(3.8M左右)，如果不集成，会从网上下载下来执行，不影响正常使用
         echo "CONFIG_FIRMWARE_INCLUDE_TROJAN=n" >> .config      #集成trojan执行文件(1.1M左右)，如果不集成，会从网上下载下来执行，不影响正常使用
