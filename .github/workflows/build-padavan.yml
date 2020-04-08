@@ -87,6 +87,7 @@ jobs:
         sed -i '/CONFIG_FIRMWARE_INCLUDE_DNSFORWARDER/d' .config ### dnsforwarder
         #科学上网
         sed -i '/CONFIG_FIRMWARE_INCLUDE_SHADOWSOCKS/d' .config ### SS plus+ ,客户端
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_MICROSOCKS/d' .config  ### microsocks，sock5代理软件
         sed -i '/CONFIG_FIRMWARE_INCLUDE_SSSERVER/d' .config    ### SS server,服务端
         sed -i '/CONFIG_FIRMWARE_INCLUDE_V2RAY/d' .config       ### v2ray 执行文件，不集成会从网上下载
         sed -i '/CONFIG_FIRMWARE_INCLUDE_TROJAN/d' .config      ### trojan执行文件，不集成会从网上下载
@@ -102,7 +103,6 @@ jobs:
         sed -i '/CONFIG_FIRMWARE_INCLUDE_SOFTETHERVPN_CLIENT/d' .config ### SOFTETHERVPN_CLIENT
         sed -i '/CONFIG_FIRMWARE_INCLUDE_SOFTETHERVPN_CMD/d' .config    ### SOFTETHERVPN_CMD
         sed -i '/CONFIG_FIRMWARE_INCLUDE_TUNSAFE/d' .config             ### tunsafe vpn
-        sed -i '/CONFIG_FIRMWARE_INCLUDE_MICROSOCKS/d' .config          ### microsocks
         sed -i '/CONFIG_FIRMWARE_INCLUDE_KUMASOCKS/d' .config           ### kumasocks，可以不集成
         sed -i '/CONFIG_FIRMWARE_INCLUDE_SOCAT/d' .config               ### Socket CAT
         sed -i '/CONFIG_FIRMWARE_INCLUDE_SRELAY/d' .config              ### srelay，可以不集成
@@ -114,17 +114,16 @@ jobs:
         sed -i '/CONFIG_FIRMWARE_INCLUDE_RTL_SDR/d' .config  ### RTL_SDR
         sed -i '/CONFIG_FIRMWARE_INCLUDE_DUMP1090/d' .config ### DUMP1090
 
-
         ######################################################################
         #以下选项是定义你需要的功能（y=集成,n=忽略），重新写入到.config文件
         ######################################################################
         #系统相关
         echo "CONFIG_FIRMWARE_INCLUDE_HTTPS=y" >> .config    #路由器https访问（必须）
         echo "CONFIG_FIRMWARE_INCLUDE_CURL=y" >> .config     #利用URL语法在命令行下工作的文件传输工具（必须）
-        echo "CONFIG_FIRMWARE_INCLUDE_HTOP=y" >> .config     #htop 是Linux系统中的一个互动的进程查看器，与Linux传统的top相比，htop更加人性化（按需要集成）。
-        echo "CONFIG_FIRMWARE_INCLUDE_TTYD=n" >> .config     #浏览器的web shell工具（按需要集成）
-        echo "CONFIG_FIRMWARE_INCLUDE_NANO=n" >> .config     #nano 是一个小型好用的文本编辑器，（按需求集成）。
-        echo "CONFIG_FIRMWARE_INCLUDE_IPERF3=n" >> .config   #iperf3 是一个网络速度测试工具,支持IPv4与IPv6,支持TCP、UDP、SCTP传输协议，（按需求集成）。
+        echo "CONFIG_FIRMWARE_INCLUDE_HTOP=y" >> .config     #htop 是Linux系统中的一个互动的进程查看器，与Linux传统的top相比，htop更加人性化。top太老了,推荐集成。
+        echo "CONFIG_FIRMWARE_INCLUDE_TTYD=n" >> .config     #浏览器的web shell工具（最好集成）
+        echo "CONFIG_FIRMWARE_INCLUDE_NANO=n" >> .config     #nano是一个小型好用的文本编辑器，（按需求集成）。
+        echo "CONFIG_FIRMWARE_INCLUDE_IPERF3=n" >> .config   #iperf3是一个网络速度测试工具,支持IPv4与IPv6,支持TCP、UDP、SCTP传输协议，（按需求集成）。
         echo "CONFIG_FIRMWARE_INCLUDE_VLMCSD=n" >> .config   #KMS激活服务器，（按需求集成）
         #穿透服务
         echo "CONFIG_FIRMWARE_INCLUDE_ALIDDNS=y" >> .config  #阿里DDNS
@@ -139,17 +138,18 @@ jobs:
         echo "CONFIG_FIRMWARE_INCLUDE_SMBD36=y" >> .config          #升级samba3为smaba3.6
         echo "CONFIG_FIRMWARE_INCLUDE_FTPD=y" >> .config            #开启FTP服务器
         echo "CONFIG_FIRMWARE_INCLUDE_CADDY=n" >> .config           #caddy，在线文件管理服务
-        echo "CONFIG_FIRMWARE_INCLUDE_CADDYBIN=n" >> .config        #集成caddy 执行文件，此文件有13M,请注意固件大小。如果不集成，会从网上下载下来执行，不影响正常使用
-        echo "CONFIG_FIRMWARE_INCLUDE_TRANSMISSION=n" >> .config    #transmission 服务 ~1.5MB
-        echo "CONFIG_FIRMWARE_INCLUDE_TRANSMISSION_WEB_CONTROL=n" >> .config  #transmission 网页端 ~0.8MB
-        echo "CONFIG_FIRMWARE_INCLUDE_ARIA=y" >> .config                      #aria 服务 ~3.5MB
-        echo "CONFIG_FIRMWARE_INCLUDE_ARIA_WEB_CONTROL=y" >> .config          #aira 网页端 ~0.7MB
+        echo "CONFIG_FIRMWARE_INCLUDE_CADDYBIN=n" >> .config        #集成caddy执行文件，此文件有13M,请注意固件大小。如果不集成，会从网上下载下来执行，不影响正常使用
+        echo "CONFIG_FIRMWARE_INCLUDE_TRANSMISSION=n" >> .config    #transmission服务 ~1.5MB
+        echo "CONFIG_FIRMWARE_INCLUDE_TRANSMISSION_WEB_CONTROL=n" >> .config  #transmission网页端 ~0.8MB
+        echo "CONFIG_FIRMWARE_INCLUDE_ARIA=y" >> .config                      #aria服务 ~3.5MB
+        echo "CONFIG_FIRMWARE_INCLUDE_ARIA_WEB_CONTROL=y" >> .config          #aira网页端 ~0.7MB
         #DNS加速服务
-        echo "CONFIG_FIRMWARE_INCLUDE_SMARTDNS=n" >> .config     #SmartDns 服务
-        echo "CONFIG_FIRMWARE_INCLUDE_SMARTDNSBIN=n" >> .config  #SmartDns 执行文件，可以不集成，会从网上下载下来执行，不影响正常使用。 
-        echo "CONFIG_FIRMWARE_INCLUDE_DNSFORWARDER=n" >> .config #dnsForwarder
+        echo "CONFIG_FIRMWARE_INCLUDE_SMARTDNS=n" >> .config     #SmartDns服务
+        echo "CONFIG_FIRMWARE_INCLUDE_SMARTDNSBIN=n" >> .config  #SmartDns执行文件，可以不集成，会从网上下载下来执行，不影响正常使用。 
+        echo "CONFIG_FIRMWARE_INCLUDE_DNSFORWARDER=n" >> .config #dns forwarder
         #科学上网
         echo "CONFIG_FIRMWARE_INCLUDE_SHADOWSOCKS=y" >> .config #SS plus+，客户端
+        echo "CONFIG_FIRMWARE_INCLUDE_MICROSOCKS=y" >> .config  #microsocks，sock5代理，如果想把梯子共享给其他人使用。
         echo "CONFIG_FIRMWARE_INCLUDE_SSSERVER=n" >> .config    #SS server，服务端
         echo "CONFIG_FIRMWARE_INCLUDE_V2RAY=n" >> .config       #集成v2ray 执行文件(3.8M左右)，如果不集成，会从网上下载下来执行，不影响正常使用
         echo "CONFIG_FIRMWARE_INCLUDE_TROJAN=n" >> .config      #集成trojan执行文件(1.1M左右)，如果不集成，会从网上下载下来执行，不影响正常使用
@@ -165,17 +165,16 @@ jobs:
         echo "CONFIG_FIRMWARE_INCLUDE_SOFTETHERVPN_CLIENT=n" >> .config #softethervpn_client，不需要集成
         echo "CONFIG_FIRMWARE_INCLUDE_SOFTETHERVPN_CMD=n" >> .config    #softethervpn_cmd，不需要集成
         echo "CONFIG_FIRMWARE_INCLUDE_TUNSAFE=n" >> .config             #tunsafe vpn，不需要集成
-        echo "CONFIG_FIRMWARE_INCLUDE_MICROSOCKS=n" >> .config          #microsocks，可以不集成
-        echo "CONFIG_FIRMWARE_INCLUDE_KUMASOCKS=n" >> .config           #kumasocks，可以不集成
+        echo "CONFIG_FIRMWARE_INCLUDE_KUMASOCKS=n" >> .config           #kumasocks,可以不集成
         echo "CONFIG_FIRMWARE_INCLUDE_SOCAT=n" >> .config               #Socket CAT的主要特点就是在两个数据流之间建立通道，且支持众多协议和链接方式。
         echo "CONFIG_FIRMWARE_INCLUDE_SRELAY=n" >> .config              #srelay，可以不集成
-        echo "CONFIG_FIRMWARE_INCLUDE_LRZSZ=n" >> .config               #lrzsz 是一款在linux里可代替ftp上传和下载的程序，可以不集成
-        echo "CONFIG_FIRMWARE_INCLUDE_MTR=n" >> .config                 #MTR 是一款非常好用的网络分析工具，使管理员能够诊断和隔离网络错误。
+        echo "CONFIG_FIRMWARE_INCLUDE_LRZSZ=n" >> .config               #lrzsz是一款在linux里可代替ftp上传和下载的程序，可以不集成
+        echo "CONFIG_FIRMWARE_INCLUDE_MTR=n" >> .config                 #MTR是一款非常好用的网络分析工具，使管理员能够诊断和隔离网络错误。
         echo "CONFIG_FIRMWARE_INCLUDE_OPENSSL_EXE=n" >> .config         #openssl_exe 自动生成证书服务
         echo "CONFIG_FIRMWARE_INCLUDE_NAPT66=n" >> .config              #napt66是北邮学生开发的在较旧内核的Linux上实现ipv6 nat的内核模块
         #USB电视棒服务
-        echo "CONFIG_FIRMWARE_INCLUDE_RTL_SDR=n" >> .config             #RTL-SDR 电视棒服务,需USB电视棒硬件支持，不需要集成
-        echo "CONFIG_FIRMWARE_INCLUDE_DUMP1090=n" >> .config            #dump1090 是专门为RTL-SDR设备设计的S模式解码器。这个程序可以配合电视棒实时在google map上显示飞机位置和飞行方向
+        echo "CONFIG_FIRMWARE_INCLUDE_RTL_SDR=n" >> .config             #支持RTL-SDR电视棒服务,需USB电视棒硬件支持，不需要集成
+        echo "CONFIG_FIRMWARE_INCLUDE_DUMP1090=n" >> .config            #dump1090是专门为RTL-SDR设备设计的S模式解码器。这个程序可以配合电视棒实时在google map上显示飞机位置和飞行方向
 
         #########################################################################################
         #自定义添加其它功能请参考源码configs/templates/目录下的config文件。按照上面的格式添加即可
