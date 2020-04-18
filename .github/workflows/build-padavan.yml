@@ -124,10 +124,10 @@ jobs:
         echo "CONFIG_FIRMWARE_INCLUDE_TTYD=n" >> .config     #基于浏览器的web shell工具（最好集成）
         echo "CONFIG_FIRMWARE_INCLUDE_NANO=n" >> .config     #nano是一个小型好用的文本编辑器，（按需求集成）。
         echo "CONFIG_FIRMWARE_INCLUDE_IPERF3=n" >> .config   #iperf3是一个网络速度测试工具,支持IPv4与IPv6,支持TCP、UDP、SCTP传输协议，（按需求集成）。
-        echo "CONFIG_FIRMWARE_INCLUDE_VLMCSD=n" >> .config   #KMS激活服务器，（按需求集成）
+        echo "CONFIG_FIRMWARE_INCLUDE_VLMCSD=y" >> .config   #KMS激活服务器，（按需求集成）
         echo "CONFIG_FIRMWARE_INCLUDE_LRZSZ=n" >> .config    #lrzsz是一款在linux里可代替ftp上传和下载的程序，可以不集成
         echo "CONFIG_FIRMWARE_INCLUDE_MTR=n" >> .config      #MTR是一款非常好用的网络分析工具，使管理员能够诊断和隔离网络错误。
-        echo "CONFIG_FIRMWARE_INCLUDE_NAPT66=n" >> .config   #napt66是北邮学生开发的在较旧内核的Linux上实现ipv6 nat的内核模块
+        echo "CONFIG_FIRMWARE_INCLUDE_NAPT66=y" >> .config   #napt66是北邮学生开发的在较旧内核的Linux上实现ipv6 nat的内核模块
         echo "CONFIG_FIRMWARE_INCLUDE_OPENSSL_EXE=y" >> .config #openssl_exe 自动生成证书服务
         #网易云音乐
         echo "CONFIG_FIRMWARE_INCLUDE_WYY=y" >> .config      #网易云解锁
@@ -139,19 +139,19 @@ jobs:
         #去广告
         echo "CONFIG_FIRMWARE_INCLUDE_ADBYBY=y" >> .config      #广告过滤，adbyby plus+
         echo "CONFIG_FIRMWARE_INCLUDE_KOOLPROXY=y" >> .config   #广告过滤，koolproxy
-        echo "CONFIG_FIRMWARE_INCLUDE_ADGUARDHOME=n" >> .config #广告过滤，adguardhome
+        echo "CONFIG_FIRMWARE_INCLUDE_ADGUARDHOME=y" >> .config #广告过滤，adguardhome
         #USB相关、下载软件
         echo "CONFIG_FIRMWARE_INCLUDE_SMBD=y" >> .config            #开启smaba和WINS服务
         echo "CONFIG_FIRMWARE_INCLUDE_SMBD36=y" >> .config          #升级samba3为smaba3.6
         echo "CONFIG_FIRMWARE_INCLUDE_FTPD=y" >> .config            #开启FTP服务器
-        echo "CONFIG_FIRMWARE_INCLUDE_CADDY=n" >> .config           #caddy，在线文件管理服务
+        echo "CONFIG_FIRMWARE_INCLUDE_CADDY=y" >> .config           #caddy，在线文件管理服务
         echo "CONFIG_FIRMWARE_INCLUDE_CADDYBIN=n" >> .config        #集成caddy执行文件，此文件有13M,请注意固件大小。如果不集成，会从网上下载下来执行，不影响正常使用
-        echo "CONFIG_FIRMWARE_INCLUDE_TRANSMISSION=n" >> .config    #transmission服务 ~1.5MB
-        echo "CONFIG_FIRMWARE_INCLUDE_TRANSMISSION_WEB_CONTROL=n" >> .config  #transmission网页端 ~0.8MB
+        echo "CONFIG_FIRMWARE_INCLUDE_TRANSMISSION=y" >> .config    #transmission服务 ~1.5MB
+        echo "CONFIG_FIRMWARE_INCLUDE_TRANSMISSION_WEB_CONTROL=y" >> .config  #transmission网页端 ~0.8MB
         echo "CONFIG_FIRMWARE_INCLUDE_ARIA=y" >> .config                      #aria服务 ~3.5MB
         echo "CONFIG_FIRMWARE_INCLUDE_ARIA_WEB_CONTROL=y" >> .config          #aira网页端 ~0.7MB
         #DNS加速服务
-        echo "CONFIG_FIRMWARE_INCLUDE_SMARTDNS=n" >> .config     #SmartDns服务
+        echo "CONFIG_FIRMWARE_INCLUDE_SMARTDNS=y" >> .config     #SmartDns服务
         echo "CONFIG_FIRMWARE_INCLUDE_SMARTDNSBIN=n" >> .config  #SmartDns执行文件，可以不集成，会从网上下载下来执行，不影响正常使用。 
         echo "CONFIG_FIRMWARE_INCLUDE_DNSFORWARDER=n" >> .config #dns forwarder
         #科学上网
