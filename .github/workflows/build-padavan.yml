@@ -7,10 +7,10 @@ on:
   push:
     tags:
     - 'v*'
-  #  branches: 
-  #    - master
-  #  schedule:
-  #    - cron: 0 8 * * 5
+#  branches: 
+#    - master
+#  schedule:
+#    - cron: 0 8 * * 5
   watch:
     types: [started]
 
@@ -34,20 +34,17 @@ jobs:
       run: |
         git clone --depth=1 https://github.com/chongshengB/rt-n56u.git /opt/rt-n56u
         cd /opt/rt-n56u/toolchain-mipsel
-        mkdir -p toolchain-3.4.x
-        wget https://github.com/hanwckf/padavan-toolchain/releases/download/v1.1/mipsel-linux-uclibc.tar.xz
-        tar -xvf mipsel-linux-uclibc.tar.xz -C toolchain-3.4.x
+        sh dl_toolchain.sh
         mkdir -p /opt/images/
     - name: Build Firmware
       env:
-        TNAME: K2P
+        TNAME: K2P-USB-5.0
       run: |
         cd /opt/rt-n56u/trunk
         if [ ! -f configs/templates/$TNAME.config ] ; then
         echo "configs/templates/$TNAME.config not found "
         exit 1
         fi
-
         cp -f configs/templates/$TNAME.config .config
         ################################################################################################
         #因不同型号配置功能不一样，所以先把配置项删除，如果你自己要添加其他的，也要写上删除这一条，切记！！！
@@ -63,6 +60,13 @@ jobs:
         sed -i '/CONFIG_FIRMWARE_INCLUDE_NANO/d' .config     ### NANO 文本编辑小工具
         sed -i '/CONFIG_FIRMWARE_INCLUDE_IPERF3/d' .config   ### IPERF3 测速工具
         sed -i '/CONFIG_FIRMWARE_INCLUDE_VLMCSD/d' .config   ### VLMCSD（KMS激活服务器）
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_LRZSZ/d' .config    ### LRZSZ，linux系统中类FTP的软件。
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_MTR/d' .config      ### MTR，网络分析工具。
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_NAPT66/d' .config   ### NAPT66是北邮学生开发的在较旧内核的Linux上实现ipv6 nat的内核模块
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_OPENSSL_EXE/d' .config ### openssl_exe 自动生成证书服务
+        #网易云音乐
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_WYY/d' .config      #网易云解锁
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_WYYBIN/d' .config   #网易云解锁GO版本执行文件（4M多）注意固件超大小,不集成会自动下载
         #穿透服务
         sed -i '/CONFIG_FIRMWARE_INCLUDE_ALIDDNS/d' .config  ### 阿里DDNS
         sed -i '/CONFIG_FIRMWARE_INCLUDE_FRPC/d' .config     ### 内网穿透FRPC
@@ -87,7 +91,7 @@ jobs:
         sed -i '/CONFIG_FIRMWARE_INCLUDE_DNSFORWARDER/d' .config ### dnsforwarder
         #科学上网
         sed -i '/CONFIG_FIRMWARE_INCLUDE_SHADOWSOCKS/d' .config ### SS plus+ ,客户端
-        sed -i '/CONFIG_FIRMWARE_INCLUDE_MICROSOCKS/d' .config  ### microsocks，SOCK5代理服务器，如果你想把梯子共享给其他人
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_MICROSOCKS/d' .config  ### microsocks，sock5代理软件
         sed -i '/CONFIG_FIRMWARE_INCLUDE_SSSERVER/d' .config    ### SS server,服务端
         sed -i '/CONFIG_FIRMWARE_INCLUDE_V2RAY/d' .config       ### v2ray 执行文件，不集成会从网上下载
         sed -i '/CONFIG_FIRMWARE_INCLUDE_TROJAN/d' .config      ### trojan执行文件，不集成会从网上下载
@@ -106,10 +110,6 @@ jobs:
         sed -i '/CONFIG_FIRMWARE_INCLUDE_KUMASOCKS/d' .config           ### kumasocks，可以不集成
         sed -i '/CONFIG_FIRMWARE_INCLUDE_SOCAT/d' .config               ### Socket CAT
         sed -i '/CONFIG_FIRMWARE_INCLUDE_SRELAY/d' .config              ### srelay，可以不集成
-        sed -i '/CONFIG_FIRMWARE_INCLUDE_LRZSZ/d' .config               ### LRZSZ，linux系统中类FTP的软件。
-        sed -i '/CONFIG_FIRMWARE_INCLUDE_MTR/d' .config                 ### MTR，网络分析工具。
-        sed -i '/CONFIG_FIRMWARE_INCLUDE_OPENSSL_EXE/d' .config         ### openssl_exe 自动生成证书服务
-        sed -i '/CONFIG_FIRMWARE_INCLUDE_NAPT66/d' .config              ### NAPT66是北邮学生开发的在较旧内核的Linux上实现ipv6 nat的内核模块
         #电视棒
         sed -i '/CONFIG_FIRMWARE_INCLUDE_RTL_SDR/d' .config  ### RTL_SDR
         sed -i '/CONFIG_FIRMWARE_INCLUDE_DUMP1090/d' .config ### DUMP1090
@@ -121,10 +121,17 @@ jobs:
         echo "CONFIG_FIRMWARE_INCLUDE_HTTPS=y" >> .config    #路由器https访问（必须）
         echo "CONFIG_FIRMWARE_INCLUDE_CURL=y" >> .config     #利用URL语法在命令行下工作的文件传输工具（必须）
         echo "CONFIG_FIRMWARE_INCLUDE_HTOP=y" >> .config     #htop 是Linux系统中的一个互动的进程查看器，与Linux传统的top相比，htop更加人性化。top太老了,推荐集成。
-        echo "CONFIG_FIRMWARE_INCLUDE_TTYD=n" >> .config     #浏览器的web shell工具（最好集成）
+        echo "CONFIG_FIRMWARE_INCLUDE_TTYD=n" >> .config     #基于浏览器的web shell工具（最好集成）
         echo "CONFIG_FIRMWARE_INCLUDE_NANO=n" >> .config     #nano是一个小型好用的文本编辑器，（按需求集成）。
         echo "CONFIG_FIRMWARE_INCLUDE_IPERF3=n" >> .config   #iperf3是一个网络速度测试工具,支持IPv4与IPv6,支持TCP、UDP、SCTP传输协议，（按需求集成）。
         echo "CONFIG_FIRMWARE_INCLUDE_VLMCSD=n" >> .config   #KMS激活服务器，（按需求集成）
+        echo "CONFIG_FIRMWARE_INCLUDE_LRZSZ=n" >> .config    #lrzsz是一款在linux里可代替ftp上传和下载的程序，可以不集成
+        echo "CONFIG_FIRMWARE_INCLUDE_MTR=n" >> .config      #MTR是一款非常好用的网络分析工具，使管理员能够诊断和隔离网络错误。
+        echo "CONFIG_FIRMWARE_INCLUDE_NAPT66=n" >> .config   #napt66是北邮学生开发的在较旧内核的Linux上实现ipv6 nat的内核模块
+        echo "CONFIG_FIRMWARE_INCLUDE_OPENSSL_EXE=y" >> .config #openssl_exe 自动生成证书服务
+        #网易云音乐
+        echo "CONFIG_FIRMWARE_INCLUDE_WYY=y" >> .config      #网易云解锁
+        echo "CONFIG_FIRMWARE_INCLUDE_WYYBIN=n" >> .config   #网易云解锁GO版本执行文件（4M多）注意固件超大小,不集成会自动下载
         #穿透服务
         echo "CONFIG_FIRMWARE_INCLUDE_ALIDDNS=y" >> .config  #阿里DDNS
         echo "CONFIG_FIRMWARE_INCLUDE_FRPC=n" >> .config     #内网穿透frpc
@@ -134,22 +141,22 @@ jobs:
         echo "CONFIG_FIRMWARE_INCLUDE_KOOLPROXY=y" >> .config   #广告过滤，koolproxy
         echo "CONFIG_FIRMWARE_INCLUDE_ADGUARDHOME=n" >> .config #广告过滤，adguardhome
         #USB相关、下载软件
-        echo "CONFIG_FIRMWARE_INCLUDE_SMBD=n" >> .config            #开启smaba和WINS服务
-        echo "CONFIG_FIRMWARE_INCLUDE_SMBD36=n" >> .config          #升级samba3为smaba3.6
-        echo "CONFIG_FIRMWARE_INCLUDE_FTPD=n" >> .config            #开启FTP服务器
+        echo "CONFIG_FIRMWARE_INCLUDE_SMBD=y" >> .config            #开启smaba和WINS服务
+        echo "CONFIG_FIRMWARE_INCLUDE_SMBD36=y" >> .config          #升级samba3为smaba3.6
+        echo "CONFIG_FIRMWARE_INCLUDE_FTPD=y" >> .config            #开启FTP服务器
         echo "CONFIG_FIRMWARE_INCLUDE_CADDY=n" >> .config           #caddy，在线文件管理服务
         echo "CONFIG_FIRMWARE_INCLUDE_CADDYBIN=n" >> .config        #集成caddy执行文件，此文件有13M,请注意固件大小。如果不集成，会从网上下载下来执行，不影响正常使用
         echo "CONFIG_FIRMWARE_INCLUDE_TRANSMISSION=n" >> .config    #transmission服务 ~1.5MB
         echo "CONFIG_FIRMWARE_INCLUDE_TRANSMISSION_WEB_CONTROL=n" >> .config  #transmission网页端 ~0.8MB
-        echo "CONFIG_FIRMWARE_INCLUDE_ARIA=n" >> .config                      #aria服务 ~3.5MB
-        echo "CONFIG_FIRMWARE_INCLUDE_ARIA_WEB_CONTROL=n" >> .config          #aira网页端 ~0.7MB
+        echo "CONFIG_FIRMWARE_INCLUDE_ARIA=y" >> .config                      #aria服务 ~3.5MB
+        echo "CONFIG_FIRMWARE_INCLUDE_ARIA_WEB_CONTROL=y" >> .config          #aira网页端 ~0.7MB
         #DNS加速服务
         echo "CONFIG_FIRMWARE_INCLUDE_SMARTDNS=n" >> .config     #SmartDns服务
         echo "CONFIG_FIRMWARE_INCLUDE_SMARTDNSBIN=n" >> .config  #SmartDns执行文件，可以不集成，会从网上下载下来执行，不影响正常使用。 
         echo "CONFIG_FIRMWARE_INCLUDE_DNSFORWARDER=n" >> .config #dns forwarder
         #科学上网
-        echo "CONFIG_FIRMWARE_INCLUDE_SHADOWSOCKS=n" >> .config #SS plus+，客户端
-        echo "CONFIG_FIRMWARE_INCLUDE_MICROSOCKS=n" >> .config  #microsocks，SOCK5代理服务器，如果你想把梯子共享给其他人
+        echo "CONFIG_FIRMWARE_INCLUDE_SHADOWSOCKS=y" >> .config #SS plus+，客户端
+        echo "CONFIG_FIRMWARE_INCLUDE_MICROSOCKS=y" >> .config  #microsocks，sock5代理，如果想把梯子共享给其他人使用。
         echo "CONFIG_FIRMWARE_INCLUDE_SSSERVER=n" >> .config    #SS server，服务端
         echo "CONFIG_FIRMWARE_INCLUDE_V2RAY=n" >> .config       #集成v2ray 执行文件(3.8M左右)，如果不集成，会从网上下载下来执行，不影响正常使用
         echo "CONFIG_FIRMWARE_INCLUDE_TROJAN=n" >> .config      #集成trojan执行文件(1.1M左右)，如果不集成，会从网上下载下来执行，不影响正常使用
@@ -168,10 +175,6 @@ jobs:
         echo "CONFIG_FIRMWARE_INCLUDE_KUMASOCKS=n" >> .config           #kumasocks,可以不集成
         echo "CONFIG_FIRMWARE_INCLUDE_SOCAT=n" >> .config               #Socket CAT的主要特点就是在两个数据流之间建立通道，且支持众多协议和链接方式。
         echo "CONFIG_FIRMWARE_INCLUDE_SRELAY=n" >> .config              #srelay，可以不集成
-        echo "CONFIG_FIRMWARE_INCLUDE_LRZSZ=n" >> .config               #lrzsz是一款在linux里可代替ftp上传和下载的程序，可以不集成
-        echo "CONFIG_FIRMWARE_INCLUDE_MTR=n" >> .config                 #MTR是一款非常好用的网络分析工具，使管理员能够诊断和隔离网络错误。
-        echo "CONFIG_FIRMWARE_INCLUDE_OPENSSL_EXE=n" >> .config         #openssl_exe 自动生成证书服务
-        echo "CONFIG_FIRMWARE_INCLUDE_NAPT66=n" >> .config              #napt66是北邮学生开发的在较旧内核的Linux上实现ipv6 nat的内核模块
         #USB电视棒服务
         echo "CONFIG_FIRMWARE_INCLUDE_RTL_SDR=n" >> .config             #支持RTL-SDR电视棒服务,需USB电视棒硬件支持，不需要集成
         echo "CONFIG_FIRMWARE_INCLUDE_DUMP1090=n" >> .config            #dump1090是专门为RTL-SDR设备设计的S模式解码器。这个程序可以配合电视棒实时在google map上显示飞机位置和飞行方向
@@ -183,7 +186,7 @@ jobs:
         #echo "自定义项=y" >> .config
         #########################################################################################
         sudo ./clear_tree
-        sudo ./build_firmware_bkye $TNAME
+        sudo ./build_firmware_modify $TNAME 0
         sudo mv -f images/*.trx /opt/images/
     - name : Upload packages
       uses: actions/upload-artifact@master
