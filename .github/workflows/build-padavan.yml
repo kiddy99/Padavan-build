@@ -130,7 +130,7 @@ jobs:
         echo "CONFIG_FIRMWARE_INCLUDE_NAPT66=n" >> .config   #napt66是北邮学生开发的在较旧内核的Linux上实现ipv6 nat的内核模块
         echo "CONFIG_FIRMWARE_INCLUDE_OPENSSL_EXE=y" >> .config #openssl_exe 自动生成证书服务
         #网易云音乐
-        echo "CONFIG_FIRMWARE_INCLUDE_WYY=y" >> .config      #网易云解锁
+        echo "CONFIG_FIRMWARE_INCLUDE_WYY=n" >> .config      #网易云解锁
         echo "CONFIG_FIRMWARE_INCLUDE_WYYBIN=n" >> .config   #网易云解锁GO版本执行文件（4M多）注意固件超大小,不集成会自动下载
         #穿透服务
         echo "CONFIG_FIRMWARE_INCLUDE_ALIDDNS=y" >> .config  #阿里DDNS
@@ -138,7 +138,7 @@ jobs:
         echo "CONFIG_FIRMWARE_INCLUDE_FRPS=n" >> .config     #内网穿透frps
         #去广告
         echo "CONFIG_FIRMWARE_INCLUDE_ADBYBY=y" >> .config      #广告过滤，adbyby plus+
-        echo "CONFIG_FIRMWARE_INCLUDE_KOOLPROXY=n" >> .config   #广告过滤，koolproxy
+        echo "CONFIG_FIRMWARE_INCLUDE_KOOLPROXY=y" >> .config   #广告过滤，koolproxy
         echo "CONFIG_FIRMWARE_INCLUDE_ADGUARDHOME=n" >> .config #广告过滤，adguardhome
         #USB相关、下载软件
         echo "CONFIG_FIRMWARE_INCLUDE_SMBD=n" >> .config            #开启smaba和WINS服务
@@ -151,7 +151,7 @@ jobs:
         echo "CONFIG_FIRMWARE_INCLUDE_ARIA=n" >> .config                      #aria服务 ~3.5MB
         echo "CONFIG_FIRMWARE_INCLUDE_ARIA_WEB_CONTROL=n" >> .config          #aira网页端 ~0.7MB
         #DNS加速服务
-        echo "CONFIG_FIRMWARE_INCLUDE_SMARTDNS=n" >> .config     #SmartDns服务
+        echo "CONFIG_FIRMWARE_INCLUDE_SMARTDNS=y" >> .config     #SmartDns服务
         echo "CONFIG_FIRMWARE_INCLUDE_SMARTDNSBIN=n" >> .config  #SmartDns执行文件，可以不集成，会从网上下载下来执行，不影响正常使用。 
         echo "CONFIG_FIRMWARE_INCLUDE_DNSFORWARDER=n" >> .config #dns forwarder
         #科学上网
