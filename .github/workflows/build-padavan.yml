@@ -71,6 +71,7 @@ jobs:
         sed -i '/CONFIG_FIRMWARE_INCLUDE_ALIDDNS/d' .config  ### 阿里DDNS
         sed -i '/CONFIG_FIRMWARE_INCLUDE_FRPC/d' .config     ### 内网穿透FRPC
         sed -i '/CONFIG_FIRMWARE_INCLUDE_FRPS/d' .config     ### 内网穿透FRPS
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_ZEROTIER/d' .config ### 内网穿透ZEROTIER
         #去广告
         sed -i '/CONFIG_FIRMWARE_INCLUDE_ADBYBY/d' .config      ### 广告过滤，adbyby plus+
         sed -i '/CONFIG_FIRMWARE_INCLUDE_KOOLPROXY/d' .config   ### 广告过滤，koolproxy
@@ -136,6 +137,7 @@ jobs:
         echo "CONFIG_FIRMWARE_INCLUDE_ALIDDNS=y" >> .config  #阿里DDNS
         echo "CONFIG_FIRMWARE_INCLUDE_FRPC=n" >> .config     #内网穿透frpc
         echo "CONFIG_FIRMWARE_INCLUDE_FRPS=n" >> .config     #内网穿透frps
+        echo "CONFIG_FIRMWARE_INCLUDE_ZEROTIER=n" >> .config #内网穿透 zerotier ~1.3M
         #去广告
         echo "CONFIG_FIRMWARE_INCLUDE_ADBYBY=y" >> .config      #广告过滤，adbyby plus+
         echo "CONFIG_FIRMWARE_INCLUDE_KOOLPROXY=y" >> .config   #广告过滤，koolproxy
