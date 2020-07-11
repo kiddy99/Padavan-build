@@ -123,9 +123,9 @@ jobs:
         echo "CONFIG_FIRMWARE_INCLUDE_CURL=y" >> .config        #利用URL语法在命令行下工作的文件传输工具（必须）
         echo "CONFIG_FIRMWARE_INCLUDE_HTOP=y" >> .config        #htop 是Linux系统中的一个互动的进程查看器，与Linux传统的top相比，htop更加人性化。top太老了,推荐集成。
         echo "CONFIG_FIRMWARE_INCLUDE_OPENSSL_EXE=y" >> .config #openssl_exe 自动生成证书服务（按需集成）
-        echo "CONFIG_FIRMWARE_INCLUDE_TTYD=n" >> .config        #基于浏览器的web shell工具（按需集成）
+        echo "CONFIG_FIRMWARE_INCLUDE_TTYD=y" >> .config        #基于浏览器的web shell工具（按需集成）
         echo "CONFIG_FIRMWARE_INCLUDE_NANO=n" >> .config        #nano是一个小型好用的文本编辑器，（按需求集成）。
-        echo "CONFIG_FIRMWARE_INCLUDE_IPERF3=n" >> .config      #iperf3是一个网络速度测试工具,支持IPv4与IPv6,支持TCP、UDP、SCTP传输协议，（按需求集成）。
+        echo "CONFIG_FIRMWARE_INCLUDE_IPERF3=y" >> .config      #iperf3是一个网络速度测试工具,支持IPv4与IPv6,支持TCP、UDP、SCTP传输协议，（按需求集成）。
         echo "CONFIG_FIRMWARE_INCLUDE_VLMCSD=n" >> .config      #KMS激活服务器，（按需求集成）
         echo "CONFIG_FIRMWARE_INCLUDE_LRZSZ=n" >> .config       #lrzsz是一款在linux里可代替ftp上传和下载的程序，可以不集成
         echo "CONFIG_FIRMWARE_INCLUDE_MTR=n" >> .config         #MTR是一款非常好用的网络分析工具，使管理员能够诊断和隔离网络错误，按需集成。
