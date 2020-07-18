@@ -38,7 +38,7 @@ jobs:
         mkdir -p /opt/images/
     - name: Build Firmware
       env:
-        TNAME: K2P-USB-512
+        TNAME: R2100
       run: |
         cd /opt/rt-n56u/trunk
         if [ ! -f configs/templates/$TNAME.config ] ; then
@@ -92,10 +92,10 @@ jobs:
         sed -i '/CONFIG_FIRMWARE_INCLUDE_DNSFORWARDER/d' .config ### dnsforwarder
         #科学上网
         sed -i '/CONFIG_FIRMWARE_INCLUDE_SHADOWSOCKS/d' .config  ### SS plus+ ,客户端
-        sed -i '/CONFIG_FIRMWARE_INCLUDE_MICROSOCKS/d' .config   ### microsocks，sock5代理软件
-        sed -i '/CONFIG_FIRMWARE_INCLUDE_SSSERVER/d' .config     ### SS server,服务端
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_KUMASOCKS/d' .config    ### kumasocks，soc5服务器
         sed -i '/CONFIG_FIRMWARE_INCLUDE_V2RAY/d' .config        ### v2ray 执行文件，不集成会从网上下载
         sed -i '/CONFIG_FIRMWARE_INCLUDE_TROJAN/d' .config       ### trojan执行文件，不集成会从网上下载
+        sed -i '/CONFIG_FIRMWARE_INCLUDE_SSSERVER/d' .config     ### SS server,服务端
         #校园网相关
         sed -i '/CONFIG_FIRMWARE_INCLUDE_MENTOHUST/d' .config    ### 校园网相关 MENTOHUST
         sed -i '/CONFIG_FIRMWARE_INCLUDE_SCUTCLIENT/d' .config   ### 校园网相关 SCUTCLIENT
@@ -108,7 +108,6 @@ jobs:
         sed -i '/CONFIG_FIRMWARE_INCLUDE_SOFTETHERVPN_CLIENT/d' .config ### SOFTETHERVPN_CLIENT
         sed -i '/CONFIG_FIRMWARE_INCLUDE_SOFTETHERVPN_CMD/d' .config    ### SOFTETHERVPN_CMD
         sed -i '/CONFIG_FIRMWARE_INCLUDE_TUNSAFE/d' .config             ### tunsafe vpn
-        sed -i '/CONFIG_FIRMWARE_INCLUDE_KUMASOCKS/d' .config           ### kumasocks，可以不集成
         sed -i '/CONFIG_FIRMWARE_INCLUDE_SOCAT/d' .config               ### Socket CAT
         sed -i '/CONFIG_FIRMWARE_INCLUDE_SRELAY/d' .config              ### srelay，可以不集成
         #电视棒
@@ -124,28 +123,28 @@ jobs:
         echo "CONFIG_FIRMWARE_INCLUDE_HTOP=y" >> .config        #htop 是Linux系统中的一个互动的进程查看器，与Linux传统的top相比，htop更加人性化。top太老了,推荐集成。
         echo "CONFIG_FIRMWARE_INCLUDE_OPENSSL_EXE=y" >> .config #openssl_exe 自动生成证书服务（按需集成）
         echo "CONFIG_FIRMWARE_INCLUDE_TTYD=y" >> .config        #基于浏览器的web shell工具（按需集成）
-        echo "CONFIG_FIRMWARE_INCLUDE_NANO=n" >> .config        #nano是一个小型好用的文本编辑器，（按需求集成）。
+        echo "CONFIG_FIRMWARE_INCLUDE_NANO=y" >> .config        #nano是一个小型好用的文本编辑器，（按需求集成）。
         echo "CONFIG_FIRMWARE_INCLUDE_IPERF3=y" >> .config      #iperf3是一个网络速度测试工具,支持IPv4与IPv6,支持TCP、UDP、SCTP传输协议，（按需求集成）。
         echo "CONFIG_FIRMWARE_INCLUDE_VLMCSD=n" >> .config      #KMS激活服务器，（按需求集成）
         echo "CONFIG_FIRMWARE_INCLUDE_LRZSZ=n" >> .config       #lrzsz是一款在linux里可代替ftp上传和下载的程序，可以不集成
         echo "CONFIG_FIRMWARE_INCLUDE_MTR=n" >> .config         #MTR是一款非常好用的网络分析工具，使管理员能够诊断和隔离网络错误，按需集成。
-        echo "CONFIG_FIRMWARE_INCLUDE_NAPT66=n" >> .config      #napt66是北邮学生开发的在较旧内核的Linux上实现ipv6 nat的内核模块，按需集成。
+        echo "CONFIG_FIRMWARE_INCLUDE_NAPT66=y" >> .config      #napt66是北邮学生开发的在较旧内核的Linux上实现ipv6 nat的内核模块，按需集成。
         #网易云音乐
         echo "CONFIG_FIRMWARE_INCLUDE_WYY=y" >> .config         #网易云解锁
-        echo "CONFIG_FIRMWARE_INCLUDE_WYYBIN=n" >> .config      #网易云解锁GO版本执行文件（4M多）注意固件超大小,不集成会自动下载
+        echo "CONFIG_FIRMWARE_INCLUDE_WYYBIN=y" >> .config      #网易云解锁GO版本执行文件（2M多）注意固件超大小,不集成会自动下载
         #穿透服务
         echo "CONFIG_FIRMWARE_INCLUDE_ALIDDNS=y" >> .config     #阿里DDNS
         echo "CONFIG_FIRMWARE_INCLUDE_FRPC=n" >> .config        #内网穿透frpc
         echo "CONFIG_FIRMWARE_INCLUDE_FRPS=n" >> .config        #内网穿透frps
-        echo "CONFIG_FIRMWARE_INCLUDE_ZEROTIER=n" >> .config    #内网穿透zerotier  ~1.3M
+        echo "CONFIG_FIRMWARE_INCLUDE_ZEROTIER=y" >> .config    #内网穿透zerotier  ~1.3M
         #去广告
         echo "CONFIG_FIRMWARE_INCLUDE_ADBYBY=y" >> .config      #广告过滤，adbyby plus+
         echo "CONFIG_FIRMWARE_INCLUDE_KOOLPROXY=n" >> .config   #广告过滤，koolproxy
         echo "CONFIG_FIRMWARE_INCLUDE_ADGUARDHOME=n" >> .config #广告过滤，adguardhome
         #USB相关、下载软件
-        echo "CONFIG_FIRMWARE_INCLUDE_SMBD=y" >> .config        #开启smaba和WINS服务
-        echo "CONFIG_FIRMWARE_INCLUDE_SMBD36=y" >> .config      #升级samba3为smaba3.6
-        echo "CONFIG_FIRMWARE_INCLUDE_FTPD=y" >> .config        #开启FTP服务器
+        echo "CONFIG_FIRMWARE_INCLUDE_SMBD=n" >> .config        #开启smaba和WINS服务
+        echo "CONFIG_FIRMWARE_INCLUDE_SMBD36=n" >> .config      #升级samba3为smaba3.6
+        echo "CONFIG_FIRMWARE_INCLUDE_FTPD=n" >> .config        #开启FTP服务器
         echo "CONFIG_FIRMWARE_INCLUDE_CADDY=n" >> .config       #caddy，在线文件管理服务
         echo "CONFIG_FIRMWARE_INCLUDE_CADDYBIN=n" >> .config    #集成caddy执行文件，此文件有13M,请注意固件大小。如果不集成，会从网上下载下来执行，不影响正常使用
         echo "CONFIG_FIRMWARE_INCLUDE_TRANSMISSION=n" >> .config              #transmission服务 ~1.5MB
@@ -158,11 +157,10 @@ jobs:
         echo "CONFIG_FIRMWARE_INCLUDE_DNSFORWARDER=n" >> .config #dns forwarder
         #科学上网
         echo "CONFIG_FIRMWARE_INCLUDE_SHADOWSOCKS=y" >> .config  #SS plus+，客户端
-        echo "CONFIG_FIRMWARE_INCLUDE_MICROSOCKS=y" >> .config   #microsocks，sock5代理，如果想把梯子共享给其他人使用。
-        echo "CONFIG_FIRMWARE_INCLUDE_SSSERVER=n" >> .config     #SS server，服务端
-        echo "CONFIG_FIRMWARE_INCLUDE_V2RAY=n" >> .config        #集成v2ray 执行文件(3.8M左右)，如果不集成，会从网上下载下来执行，不影响正常使用
+        echo "CONFIG_FIRMWARE_INCLUDE_KUMASOCKS=y" >> .config    #kumasocks,sock5客户端
+        echo "CONFIG_FIRMWARE_INCLUDE_V2RAY=y" >> .config        #集成v2ray 执行文件(3.8M左右)，如果不集成，会从网上下载下来执行，不影响正常使用
         echo "CONFIG_FIRMWARE_INCLUDE_TROJAN=y" >> .config       #集成trojan执行文件(1.1M左右)，如果不集成，会从网上下载下来执行，不影响正常使用
-        echo "CONFIG_FIRMWARE_INCLUDE_SSOBFS=n" >> .config       # simple-obfs混淆插件
+        echo "CONFIG_FIRMWARE_INCLUDE_SSSERVER=n" >> .config     #SS server，服务端		
         #校园网相关
         echo "CONFIG_FIRMWARE_INCLUDE_MENTOHUST=n" >> .config    #校园网相关 MentoHUST ：华中科技大的朋友开发出来的一款第三方锐捷认证工具！
         echo "CONFIG_FIRMWARE_INCLUDE_SCUTCLIENT=n" >> .config   #校园网相关 SCUTCLIENT
@@ -175,7 +173,6 @@ jobs:
         echo "CONFIG_FIRMWARE_INCLUDE_SOFTETHERVPN_CLIENT=n" >> .config #softethervpn_client，不需要集成
         echo "CONFIG_FIRMWARE_INCLUDE_SOFTETHERVPN_CMD=n" >> .config    #softethervpn_cmd，不需要集成
         echo "CONFIG_FIRMWARE_INCLUDE_TUNSAFE=n" >> .config             #tunsafe vpn，不需要集成
-        echo "CONFIG_FIRMWARE_INCLUDE_KUMASOCKS=n" >> .config           #kumasocks,可以不集成
         echo "CONFIG_FIRMWARE_INCLUDE_SOCAT=n" >> .config               #Socket CAT的主要特点就是在两个数据流之间建立通道，且支持众多协议和链接方式。
         echo "CONFIG_FIRMWARE_INCLUDE_SRELAY=n" >> .config              #srelay，可以不集成
         #USB电视棒服务
