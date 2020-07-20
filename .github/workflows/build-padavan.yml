@@ -128,7 +128,7 @@ jobs:
         echo "CONFIG_FIRMWARE_INCLUDE_VLMCSD=n" >> .config      #KMS激活服务器，（按需求集成）
         echo "CONFIG_FIRMWARE_INCLUDE_LRZSZ=n" >> .config       #lrzsz是一款在linux里可代替ftp上传和下载的程序，可以不集成
         echo "CONFIG_FIRMWARE_INCLUDE_MTR=n" >> .config         #MTR是一款非常好用的网络分析工具，使管理员能够诊断和隔离网络错误，按需集成。
-        echo "CONFIG_FIRMWARE_INCLUDE_NAPT66=y" >> .config      #napt66是北邮学生开发的在较旧内核的Linux上实现ipv6 nat的内核模块，按需集成。
+        echo "CONFIG_FIRMWARE_INCLUDE_NAPT66=n" >> .config      #napt66是北邮学生开发的在较旧内核的Linux上实现ipv6 nat的内核模块，按需集成。
         #网易云音乐
         echo "CONFIG_FIRMWARE_INCLUDE_WYY=y" >> .config         #网易云解锁
         echo "CONFIG_FIRMWARE_INCLUDE_WYYBIN=y" >> .config      #网易云解锁GO版本执行文件（2M多）注意固件超大小,不集成会自动下载
