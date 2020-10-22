@@ -131,12 +131,12 @@ jobs:
         echo "CONFIG_FIRMWARE_INCLUDE_NAPT66=n" >> .config      #napt66是北邮学生开发的在较旧内核的Linux上实现ipv6 nat的内核模块，按需集成。
         #网易云音乐
         echo "CONFIG_FIRMWARE_INCLUDE_WYY=y" >> .config         #网易云解锁
-        echo "CONFIG_FIRMWARE_INCLUDE_WYYBIN=y" >> .config      #网易云解锁GO版本执行文件（2M多）注意固件超大小,不集成会自动下载
+        echo "CONFIG_FIRMWARE_INCLUDE_WYYBIN=n" >> .config      #网易云解锁GO版本执行文件（2M多）注意固件超大小,不集成会自动下载
         #穿透服务
         echo "CONFIG_FIRMWARE_INCLUDE_ALIDDNS=y" >> .config     #阿里DDNS
         echo "CONFIG_FIRMWARE_INCLUDE_FRPC=n" >> .config        #内网穿透frpc
         echo "CONFIG_FIRMWARE_INCLUDE_FRPS=n" >> .config        #内网穿透frps
-        echo "CONFIG_FIRMWARE_INCLUDE_ZEROTIER=y" >> .config    #内网穿透zerotier  ~1.3M
+        echo "CONFIG_FIRMWARE_INCLUDE_ZEROTIER=n" >> .config    #内网穿透zerotier  ~1.3M
         #去广告
         echo "CONFIG_FIRMWARE_INCLUDE_ADBYBY=y" >> .config      #广告过滤，adbyby plus+
         echo "CONFIG_FIRMWARE_INCLUDE_KOOLPROXY=n" >> .config   #广告过滤，koolproxy
@@ -157,9 +157,9 @@ jobs:
         echo "CONFIG_FIRMWARE_INCLUDE_DNSFORWARDER=n" >> .config #dns forwarder
         #科学上网
         echo "CONFIG_FIRMWARE_INCLUDE_SHADOWSOCKS=y" >> .config  #SS plus+，客户端
-        echo "CONFIG_FIRMWARE_INCLUDE_KUMASOCKS=y" >> .config    #kumasocks,sock5客户端
-        echo "CONFIG_FIRMWARE_INCLUDE_V2RAY=y" >> .config        #集成v2ray 执行文件(3.8M左右)，如果不集成，会从网上下载下来执行，不影响正常使用
-        echo "CONFIG_FIRMWARE_INCLUDE_TROJAN=y" >> .config       #集成trojan执行文件(1.1M左右)，如果不集成，会从网上下载下来执行，不影响正常使用
+        echo "CONFIG_FIRMWARE_INCLUDE_KUMASOCKS=n" >> .config    #kumasocks,sock5客户端
+        echo "CONFIG_FIRMWARE_INCLUDE_V2RAY=n" >> .config        #集成v2ray 执行文件(3.8M左右)，如果不集成，会从网上下载下来执行，不影响正常使用
+        echo "CONFIG_FIRMWARE_INCLUDE_TROJAN=n" >> .config       #集成trojan执行文件(1.1M左右)，如果不集成，会从网上下载下来执行，不影响正常使用
         echo "CONFIG_FIRMWARE_INCLUDE_SSSERVER=n" >> .config     #SS server，服务端		
         #校园网相关
         echo "CONFIG_FIRMWARE_INCLUDE_MENTOHUST=n" >> .config    #校园网相关 MentoHUST ：华中科技大的朋友开发出来的一款第三方锐捷认证工具！
