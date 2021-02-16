@@ -32,13 +32,13 @@ jobs:
         pkg-config zlib1g-dev libgmp3-dev libmpc-dev libmpfr-dev libncurses5-dev libltdl-dev wget
     - name: Clone source code
       run: |
-        git clone --depth=1 https://github.com/chongshengB/rt-n56u.git /opt/rt-n56u
+        git clone --depth=1 https://github.com/kiddy99/rt-n56u.git /opt/rt-n56u
         cd /opt/rt-n56u/toolchain-mipsel
         sh dl_toolchain.sh
         mkdir -p /opt/images/
     - name: Build Firmware
       env:
-        TNAME: MI-NANO
+        TNAME: R2100
       run: |
         cd /opt/rt-n56u/trunk
         if [ ! -f configs/templates/$TNAME.config ] ; then
@@ -113,18 +113,17 @@ jobs:
         #电视棒
         sed -i '/CONFIG_FIRMWARE_INCLUDE_RTL_SDR/d' .config      ### RTL_SDR
         sed -i '/CONFIG_FIRMWARE_INCLUDE_DUMP1090/d' .config     ### DUMP1090
-
         ######################################################################
         #以下选项是定义你需要的功能（y=集成,n=忽略），重新写入到.config文件
         ######################################################################
         #系统相关
         echo "CONFIG_FIRMWARE_INCLUDE_HTTPS=y" >> .config       #路由器https访问（必须）
-        echo "CONFIG_FIRMWARE_INCLUDE_CURL=n" >> .config        #利用URL语法在命令行下工作的文件传输工具（必须）
-        echo "CONFIG_FIRMWARE_INCLUDE_HTOP=n" >> .config        #htop 是Linux系统中的一个互动的进程查看器，与Linux传统的top相比，htop更加人性化。top太老了,推荐集成。
-        echo "CONFIG_FIRMWARE_INCLUDE_OPENSSL_EXE=n" >> .config #openssl_exe 自动生成证书服务（按需集成）
-        echo "CONFIG_FIRMWARE_INCLUDE_TTYD=n" >> .config        #基于浏览器的web shell工具（按需集成）
-        echo "CONFIG_FIRMWARE_INCLUDE_NANO=n" >> .config        #nano是一个小型好用的文本编辑器，（按需求集成）。
-        echo "CONFIG_FIRMWARE_INCLUDE_IPERF3=n" >> .config      #iperf3是一个网络速度测试工具,支持IPv4与IPv6,支持TCP、UDP、SCTP传输协议，（按需求集成）。
+        echo "CONFIG_FIRMWARE_INCLUDE_CURL=y" >> .config        #利用URL语法在命令行下工作的文件传输工具（必须）
+        echo "CONFIG_FIRMWARE_INCLUDE_HTOP=y" >> .config        #htop 是Linux系统中的一个互动的进程查看器，与Linux传统的top相比，htop更加人性化。top太老了,推荐集成。
+        echo "CONFIG_FIRMWARE_INCLUDE_OPENSSL_EXE=y" >> .config #openssl_exe 自动生成证书服务（按需集成）
+        echo "CONFIG_FIRMWARE_INCLUDE_TTYD=y" >> .config        #基于浏览器的web shell工具（按需集成）
+        echo "CONFIG_FIRMWARE_INCLUDE_NANO=y" >> .config        #nano是一个小型好用的文本编辑器，（按需求集成）。
+        echo "CONFIG_FIRMWARE_INCLUDE_IPERF3=y" >> .config      #iperf3是一个网络速度测试工具,支持IPv4与IPv6,支持TCP、UDP、SCTP传输协议，（按需求集成）。
         echo "CONFIG_FIRMWARE_INCLUDE_VLMCSD=n" >> .config      #KMS激活服务器，（按需求集成）
         echo "CONFIG_FIRMWARE_INCLUDE_LRZSZ=n" >> .config       #lrzsz是一款在linux里可代替ftp上传和下载的程序，可以不集成
         echo "CONFIG_FIRMWARE_INCLUDE_MTR=n" >> .config         #MTR是一款非常好用的网络分析工具，使管理员能够诊断和隔离网络错误，按需集成。
@@ -133,12 +132,12 @@ jobs:
         echo "CONFIG_FIRMWARE_INCLUDE_WYY=n" >> .config         #网易云解锁
         echo "CONFIG_FIRMWARE_INCLUDE_WYYBIN=n" >> .config      #网易云解锁GO版本执行文件（2M多）注意固件超大小,不集成会自动下载
         #穿透服务
-        echo "CONFIG_FIRMWARE_INCLUDE_ALIDDNS=n" >> .config     #阿里DDNS
+        echo "CONFIG_FIRMWARE_INCLUDE_ALIDDNS=y" >> .config     #阿里DDNS
         echo "CONFIG_FIRMWARE_INCLUDE_FRPC=n" >> .config        #内网穿透frpc
         echo "CONFIG_FIRMWARE_INCLUDE_FRPS=n" >> .config        #内网穿透frps
         echo "CONFIG_FIRMWARE_INCLUDE_ZEROTIER=n" >> .config    #内网穿透zerotier  ~1.3M
         #去广告
-        echo "CONFIG_FIRMWARE_INCLUDE_ADBYBY=n" >> .config      #广告过滤，adbyby plus+
+        echo "CONFIG_FIRMWARE_INCLUDE_ADBYBY=y" >> .config      #广告过滤，adbyby plus+
         echo "CONFIG_FIRMWARE_INCLUDE_KOOLPROXY=n" >> .config   #广告过滤，koolproxy
         echo "CONFIG_FIRMWARE_INCLUDE_ADGUARDHOME=n" >> .config #广告过滤，adguardhome
         #USB相关、下载软件
@@ -156,10 +155,10 @@ jobs:
         echo "CONFIG_FIRMWARE_INCLUDE_SMARTDNSBIN=n" >> .config  #SmartDns执行文件，可以不集成，会从网上下载下来执行，不影响正常使用。 
         echo "CONFIG_FIRMWARE_INCLUDE_DNSFORWARDER=n" >> .config #dns forwarder
         #科学上网
-        echo "CONFIG_FIRMWARE_INCLUDE_SHADOWSOCKS=n" >> .config  #SS plus+，客户端
-        echo "CONFIG_FIRMWARE_INCLUDE_KUMASOCKS=n" >> .config    #kumasocks,sock5客户端
+        echo "CONFIG_FIRMWARE_INCLUDE_SHADOWSOCKS=y" >> .config  #SS plus+，客户端
+        echo "CONFIG_FIRMWARE_INCLUDE_KUMASOCKS=y" >> .config    #kumasocks,sock5客户端
         echo "CONFIG_FIRMWARE_INCLUDE_V2RAY=n" >> .config        #集成v2ray 执行文件(3.8M左右)，如果不集成，会从网上下载下来执行，不影响正常使用
-        echo "CONFIG_FIRMWARE_INCLUDE_TROJAN=n" >> .config       #集成trojan执行文件(1.1M左右)，如果不集成，会从网上下载下来执行，不影响正常使用
+        echo "CONFIG_FIRMWARE_INCLUDE_TROJAN=y" >> .config       #集成trojan执行文件(1.1M左右)，如果不集成，会从网上下载下来执行，不影响正常使用
         echo "CONFIG_FIRMWARE_INCLUDE_SSSERVER=n" >> .config     #SS server，服务端		
         #校园网相关
         echo "CONFIG_FIRMWARE_INCLUDE_MENTOHUST=n" >> .config    #校园网相关 MentoHUST ：华中科技大的朋友开发出来的一款第三方锐捷认证工具！
@@ -178,7 +177,6 @@ jobs:
         #USB电视棒服务
         echo "CONFIG_FIRMWARE_INCLUDE_RTL_SDR=n" >> .config             #支持RTL-SDR电视棒服务,需USB电视棒硬件支持，不需要集成
         echo "CONFIG_FIRMWARE_INCLUDE_DUMP1090=n" >> .config            #dump1090是专门为RTL-SDR设备设计的S模式解码器。这个程序可以配合电视棒实时在google map上显示飞机位置和飞行方向
-
         #########################################################################################
         #自定义添加其它功能请参考源码configs/templates/目录下的config文件。按照上面的格式添加即可
         #格式如下：
